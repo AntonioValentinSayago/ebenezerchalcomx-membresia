@@ -1,0 +1,22 @@
+/* public/assets/css/custom.css */
+body{
+  min-height: 100vh;
+}
+.card-soft {
+  border: 0;
+  border-radius: 1.25rem;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  overflow: hidden;
+}
+.badge-soft {
+  background: rgba(99,102,241,0.1);
+  color: #4f46e5;
+  border-radius: 9999px;
+}
+.form-section-title{
+  font-weight: 700;
+  letter-spacing: .2px;
+}
+.form-hint{
+  font-size: .85rem;
+}

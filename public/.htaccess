@@ -1,0 +1,9 @@
+# public/.htaccess (opcional si usas Apache)
+Options -MultiViews
+RewriteEngine On
+
+# Redirigir todo a /public/index.php si el proyecto está en el docroot superior
+# Si instalas la carpeta 'public' como raíz pública, esto puede no ser necesario.
+
+# Protección básica para evitar listar directorios (si el servidor lo permite)
+IndexIgnore *
