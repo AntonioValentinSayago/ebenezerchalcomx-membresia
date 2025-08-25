@@ -37,7 +37,7 @@ $val = fn($k, $d='') => htmlspecialchars($member->$k ?? $d, ENT_QUOTES, 'UTF-8')
             <form method="post" action="<?= $base ?>/index.php?controller=members&action=store" class="needs-validation" novalidate>
               <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?? '' ?>">
 
-              <div class="row g-3">
+              <div class="row g-3" style="font-weight: bold;">
                 <div class="col-md-5">
                   <label class="form-label form-section-title">Nombre(s)</label>
                   <input required name="nombres" type="text" class="form-control form-control-lg" value="<?= $val('nombres') ?>">
@@ -159,7 +159,7 @@ $val = fn($k, $d='') => htmlspecialchars($member->$k ?? $d, ENT_QUOTES, 'UTF-8')
               </div>
 
               <div class="d-flex align-items-center mt-4">
-                <button class="btn btn-lg btn-primary me-2" style="border-radius: 9999px;">
+                <button class="btn btn-lg btn-success me-2" style="border-radius: 16px; width: 100%;">
                   <i class="bi bi-save me-1"></i> Guardar registro
                 </button>
               </div>
