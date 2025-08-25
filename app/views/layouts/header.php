@@ -18,7 +18,7 @@ $base = rtrim(BASE_URL, '/');
 <nav class="navbar navbar-expand-lg navbar-dark bg-gradient shadow-sm" style="background: #2c5d70;">
   <div class="container">
     <a class="navbar-brand fw-bold" href="<?= $base ?>/index.php?controller=members&action=create">
-      <img src="./assets/img/sin_background.png" /> Ebenezer Chalco MX - Principe de Paz
+      <img src="./assets/img/sin_background.png" width="60px" height="60px"/> Ebenezer Chalco MX - Principe de Paz
     </a>
   </div>
 </nav>
