@@ -3,7 +3,7 @@
 
 <footer class="py-4 mt-auto border-top bg-white">
   <div class="container text-center text-muted small">
-    <div>© <?= date('Y') ?> Registro de Miembros • Construido con Bootstrap 5</div>
+    <div>© <?= date('Y') ?> Registro de Miembros • Ministerios Ebenezer</div>
   </div>
 </footer>
 
