@@ -9,12 +9,12 @@ $val = fn($k, $d='') => htmlspecialchars($member->$k ?? $d, ENT_QUOTES, 'UTF-8')
     <div class="card card-soft">
       <div class="row g-0">
         <div class="col-lg-5 d-none d-lg-block" style="
-          background: linear-gradient(180deg, rgba(14,165,233,1) 0%, rgba(99,102,241,1) 100%);
+          background: radial-gradient(circle,rgba(44, 93, 112, 1) 0%, rgba(148, 202, 233, 1) 100%);;
           color: #fff;">
           <div class="p-4 p-lg-5">
             <span class="badge badge-soft mb-2"><i class="bi bi-stars me-1"></i> Bienvenido</span>
-            <h2 class="fw-bold">Registro de Miembros</h2>
-            <p class="opacity-75">Completa la información para formar parte del registro de nuestra iglesia.</p>
+            <h2 class="fw-bold">Solucitud de Membresia</h2>
+            <p class="opacity-75">Completa la información para el registro de nuestra iglesia.</p>
             <ul class="list-unstyled small opacity-75">
               <li class="mb-1"><i class="bi bi-check-circle me-2"></i> Datos protegidos</li>
               <li class="mb-1"><i class="bi bi-check-circle me-2"></i> Diseño agradable</li>
@@ -38,7 +38,7 @@ $val = fn($k, $d='') => htmlspecialchars($member->$k ?? $d, ENT_QUOTES, 'UTF-8')
               <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?? '' ?>">
 
               <div class="row g-3">
-                <div class="col-md-6">
+                <div class="col-md-5">
                   <label class="form-label form-section-title">Nombre(s)</label>
                   <input required name="nombres" type="text" class="form-control form-control-lg" value="<?= $val('nombres') ?>">
                   <div class="invalid-feedback">Requerido.</div>
@@ -48,14 +48,22 @@ $val = fn($k, $d='') => htmlspecialchars($member->$k ?? $d, ENT_QUOTES, 'UTF-8')
                   <input required name="apellido_paterno" type="text" class="form-control form-control-lg" value="<?= $val('apellido_paterno') ?>">
                   <div class="invalid-feedback">Requerido.</div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-4">
                   <label class="form-label form-section-title">Apellido materno</label>
                   <input name="apellido_materno" type="text" class="form-control form-control-lg" value="<?= $val('apellido_materno') ?>">
                 </div>
 
-                <div class="col-md-3">
+                <div class="col-md-2">
                   <label class="form-label">Edad</label>
                   <input name="edad" type="number" min="0" max="120" class="form-control" value="<?= $val('edad') ?>">
+                </div>
+                <div class="col-md-5">
+                  <label class="form-label">Fecha de Nacimiento</label>
+                  <input name="fecha_nacimiento" type="date" min="0" max="120" class="form-control" value="">
+                </div>
+                <div class="col-md-4">
+                  <label class="form-label">CURP</label>
+                  <input name="curp" type="text" min="0" max="120" class="form-control" value="">
                 </div>
 
                 <div class="col-md-3">
@@ -101,7 +109,7 @@ $val = fn($k, $d='') => htmlspecialchars($member->$k ?? $d, ENT_QUOTES, 'UTF-8')
                   <input name="iglesia_anterior" type="text" class="form-control" value="<?= $val('iglesia_anterior') ?>">
                 </div>
 
-                <div class="col-md-6">
+                <div class="col-md-12">
                   <label class="form-label">Razón de salida</label>
                   <input name="razon_salida" type="text" class="form-control" value="<?= $val('razon_salida') ?>">
                 </div>
@@ -154,7 +162,6 @@ $val = fn($k, $d='') => htmlspecialchars($member->$k ?? $d, ENT_QUOTES, 'UTF-8')
                 <button class="btn btn-lg btn-primary me-2" style="border-radius: 9999px;">
                   <i class="bi bi-save me-1"></i> Guardar registro
                 </button>
-                <span class="text-muted small">Al enviar aceptas el manejo responsable de tus datos.</span>
               </div>
             </form>
 

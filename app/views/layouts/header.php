@@ -7,16 +7,18 @@ $base = rtrim(BASE_URL, '/');
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Registro de Miembros - Iglesia</title>
+  <title>Ebenezer Chalco MX</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="<?= $base ?>/assets/css/custom.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <link rel="icon" sizes="64x64" href="assets/img/sin_background.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="./assets/img/sin_background.png">  
 </head>
 <body class="bg-light">
-<nav class="navbar navbar-expand-lg navbar-dark bg-gradient shadow-sm" style="background: linear-gradient(135deg,#0ea5e9,#6366f1);">
+<nav class="navbar navbar-expand-lg navbar-dark bg-gradient shadow-sm" style="background: #2c5d70;">
   <div class="container">
     <a class="navbar-brand fw-bold" href="<?= $base ?>/index.php?controller=members&action=create">
-      <i class="bi bi-crosshair"></i> Iglesia Vida Nueva
+      <img src="./assets/img/sin_background.png" /> Ebenezer Chalco MX - Principe de Paz
     </a>
   </div>
 </nav>

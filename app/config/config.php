@@ -15,7 +15,9 @@ define('DB_PASS', '=SymfKiL#GI5');
 // URL base (sin slash final). Ej: http://localhost/church-mvc-php/public
 // Si usas XAMPP/MAMP, pon la URL correspondiente
 // define('BASE_URL', getenv('BASE_URL') ?: 'http://localhost:3000/public');
-define('BASE_URL', 'https://' . $_SERVER['HTTP_HOST']);
+// define('BASE_URL', 'https://' . $_SERVER['HTTP_HOST']);
+// URL base de tu dominio
+define('BASE_URL', 'https://ebenezerchalcomx.site');
 
 // Opciones generales
 date_default_timezone_set('America/Mexico_City');
