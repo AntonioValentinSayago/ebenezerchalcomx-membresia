@@ -65,12 +65,6 @@ $val = fn($k, $d = '') => htmlspecialchars($member->$k ?? $d, ENT_QUOTES, 'UTF-8
                   <input required name="fecha_nacimiento" type="date" min="0" max="120" class="form-control" value="">
                   <div class="invalid-feedback">Requerido.</div>
                 </div>
-                <div class="col-md-6">
-                  <label class="form-label">CURP <span class="text-danger text-bold">*</span></label>
-                  <input required name="curp" type="text" min="0" class="form-control" value="" maxlength="18"
-                    style="text-transform: uppercase;">
-                  <div class="invalid-feedback">CURP Invalido.</div>
-                </div>
                 <div class="col-md-3">
                   <label class="form-label">Edad <span class="text-danger text-bold">*</span></label>
                   <input required name="edad" type="number" min="0" max="120" class="form-control"
@@ -144,18 +138,6 @@ $val = fn($k, $d = '') => htmlspecialchars($member->$k ?? $d, ENT_QUOTES, 'UTF-8
                   <input required name="telefono" type="tel" class="form-control" value="<?= $val('telefono') ?>">
                   <div class="invalid-feedback">Requerido.</div>
                 </div>
-
-                <div class="col-md-4">
-                  <label class="form-label">Tipo de sangre <span class="text-danger text-bold">*</span></label>
-                  <select required name="tipo_sangre" class="form-select">
-                    <?php foreach ($tiposSangre as $op): ?>
-                      <option value="<?= $op ?>" <?= (($member->tipo_sangre ?? '') === $op) ? 'selected' : '' ?>><?= $op ?>
-                      </option>
-                    <?php endforeach; ?>
-                  </select>
-                  <div class="invalid-feedback">Requerido.</div>
-                </div>
-
                 <div class="col-md-4">
                   <label class="form-label">Estado civil <span class="text-danger text-bold">*</span></label>
                   <select required name="estado_civil" class="form-select">
