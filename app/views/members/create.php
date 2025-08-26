@@ -111,7 +111,7 @@ $val = fn($k, $d = '') => htmlspecialchars($member->$k ?? $d, ENT_QUOTES, 'UTF-8
                 </div>
 
 
-                <div class="col-md-6">
+                <div class="col-md-12">
                   <label class="form-label" style="font-size: 14px;">Cursos teológicos y/o discipulados</label>
                   <input required name="cursos" type="text" class="form-control" value="<?= $val('cursos') ?>"
                     placeholder="Ej.: Teología 1, Discipulado básico">
@@ -167,7 +167,7 @@ $val = fn($k, $d = '') => htmlspecialchars($member->$k ?? $d, ENT_QUOTES, 'UTF-8
                   <div class="invalid-feedback">Requerido.</div>
                 </div>
 
-                <div class="col-md-8">
+                <div class="col-md-12">
                   <label class="form-label">Razón de salida</label>
                   <input name="razon_salida" type="text" class="form-control" value="<?= $val('razon_salida') ?>">
                 </div>
