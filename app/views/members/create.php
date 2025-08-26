@@ -193,7 +193,7 @@ $val = fn($k, $d = '') => htmlspecialchars($member->$k ?? $d, ENT_QUOTES, 'UTF-8
                 <div class="col-12">
                   <div class="form-check">
                     <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
-                    <label class="form-check-label" for="invalidCheck">
+                    <label class="form-check-label" for="invalidCheck" style="font-weight: 100">
                       Al registrarte, aceptas nuestra Política de Privacidad, que describe cómo recopilamos, usamos y protegemos tus datos.
                     </label>
                     <div class="invalid-feedback">
