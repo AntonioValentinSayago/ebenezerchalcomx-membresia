@@ -39,44 +39,44 @@ $val = fn($k, $d = '') => htmlspecialchars($member->$k ?? $d, ENT_QUOTES, 'UTF-8
               <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?? '' ?>">
               <span class="text-danger text-bold">* Campos obligatorios</span> <br />
               <div class="row g-3" style="font-weight: bold;">
-                <div class="col-md-5">
-                  <label class="form-label form-section-title">Nombre(s) <span class="text-danger text-bold">*</span></label>
+                <div class="col-md-6">
+                  <label class="form-label form-section-title">Nombre(s) <span
+                      class="text-danger text-bold">*</span></label>
                   <input required name="nombres" type="text" class="form-control form-control-lg"
                     value="<?= $val('nombres') ?>">
                   <div class="invalid-feedback">Requerido.</div>
                 </div>
-                <div class="col-md-3">
-                  <label class="form-label form-section-title">Apellido paterno <span class="text-danger text-bold">*</span></label>
+                <div class="col-md-6">
+                  <label class="form-label form-section-title">Apellido paterno <span
+                      class="text-danger text-bold">*</span></label>
                   <input required name="apellido_paterno" type="text" class="form-control form-control-lg"
                     value="<?= $val('apellido_paterno') ?>">
                   <div class="invalid-feedback">Requerido.</div>
                 </div>
-                <div class="col-md-4">
-                  <label class="form-label form-section-title">Apellido materno <span class="text-danger text-bold">*</span></label>
+                <div class="col-md-6">
+                  <label class="form-label form-section-title">Apellido materno <span
+                      class="text-danger text-bold">*</span></label>
                   <input required name="apellido_materno" type="text" class="form-control form-control-lg"
                     value="<?= $val('apellido_materno') ?>">
                   <div class="invalid-feedback">Requerido.</div>
                 </div>
-
-                <div class="col-md-2">
-                  <label class="form-label">Edad <span class="text-danger text-bold">*</span></label>
-                  <input required name="edad" type="number" min="0" max="120" class="form-control"
-                    value="<?= $val('edad') ?>">
-                  <div class="invalid-feedback">Edad inválida.</div>
-                </div>
-                <div class="col-md-5">
+                <div class="col-md-6">
                   <label class="form-label">Fecha de Nacimiento <span class="text-danger text-bold">*</span></label>
                   <input required name="fecha_nacimiento" type="date" min="0" max="120" class="form-control" value="">
                   <div class="invalid-feedback">Requerido.</div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-6">
                   <label class="form-label">CURP <span class="text-danger text-bold">*</span></label>
                   <input required name="curp" type="text" min="0" class="form-control" value="" maxlength="18"
                     style="text-transform: uppercase;">
                   <div class="invalid-feedback">CURP Invalido.</div>
                 </div>
-
-
+                <div class="col-md-3">
+                  <label class="form-label">Edad <span class="text-danger text-bold">*</span></label>
+                  <input required name="edad" type="number" min="0" max="120" class="form-control"
+                    value="<?= $val('edad') ?>">
+                  <div class="invalid-feedback">Edad inválida.</div>
+                </div>
                 <div class="col-md-3">
                   <label class="form-label">Bautizado <span class="text-danger text-bold">*</span></label>
                   <div class="form-check form-switch mt-1">
@@ -96,14 +96,6 @@ $val = fn($k, $d = '') => htmlspecialchars($member->$k ?? $d, ENT_QUOTES, 'UTF-8
                   </select>
                   <div class="invalid-feedback">Requerido.</div>
                 </div>
-
-                <div class="col-md-6">
-                  <label class="form-label">Fecha de conversión</label>
-                  <input required name="fecha_conversion" type="date" class="form-control"
-                    value="<?= $val('fecha_conversion') ?>">
-                  <div class="invalid-feedback">Requerido.</div>
-                </div>
-
                 <div class="col-md-6">
                   <label class="form-label">Ocupación <span class="text-danger text-bold">*</span></label>
                   <input required list="ocupaciones" name="ocupacion" class="form-control"
@@ -113,30 +105,28 @@ $val = fn($k, $d = '') => htmlspecialchars($member->$k ?? $d, ENT_QUOTES, 'UTF-8
                       <option value="<?= htmlspecialchars($op, ENT_QUOTES, 'UTF-8') ?>"></option>
                     <?php endforeach; ?>
                   </datalist>
-                  <div class="form-hint text-muted">Puedes escribir la tuya si no aparece.</div>
+                  <div class="form-hint text-muted" style="font-size: 10px;">Puedes escribir la tuya si no aparece.
+                  </div>
                 </div>
 
                 <div class="col-md-6">
-                  <label class="form-label">Cursos teológicos y/o discipulados</label>
+                  <label class="form-label">Fecha de conversión</label>
+                  <input required name="fecha_conversion" type="date" class="form-control"
+                    value="<?= $val('fecha_conversion') ?>">
+                  <div class="invalid-feedback">Requerido.</div>
+                </div>
+
+
+                <div class="col-md-6">
+                  <label class="form-label" style="font-size: 14px;">Cursos teológicos y/o discipulados</label>
                   <input required name="cursos" type="text" class="form-control" value="<?= $val('cursos') ?>"
                     placeholder="Ej.: Teología 1, Discipulado básico">
                   <div class="invalid-feedback">Requerido.</div>
                 </div>
 
-                <div class="col-md-6">
-                  <label class="form-label">Nombre de iglesia anterior</label>
-                  <input name="iglesia_anterior" type="text" class="form-control"
-                    value="<?= $val('iglesia_anterior') ?>">
-                  <div class="invalid-feedback">Requerido.</div>
-                </div>
-
-                <div class="col-md-12">
-                  <label class="form-label">Razón de salida</label>
-                  <input name="razon_salida" type="text" class="form-control" value="<?= $val('razon_salida') ?>">
-                </div>
-
                 <div class="col-12">
-                  <label class="form-label">Talentos y virtudes (separa con comas) <span class="text-danger text-bold">*</span></label>
+                  <label class="form-label">Talentos y virtudes (separa con comas) <span
+                      class="text-danger text-bold">*</span></label>
                   <input required id="talentos" name="talentos" type="text" class="form-control"
                     value="<?= $val('talentos') ?>" placeholder="Ej.: canto, liderazgo, servicio, enseñanza">
                   <div id="talentosPreview" class="mt-2"></div>
@@ -186,6 +176,18 @@ $val = fn($k, $d = '') => htmlspecialchars($member->$k ?? $d, ENT_QUOTES, 'UTF-8
                     <?php endforeach; ?>
                   </select>
                   <div class="invalid-feedback">Requerido.</div>
+                </div>
+
+                <div class="col-md-4">
+                  <label class="form-label">Iglesia anterior</label>
+                  <input name="iglesia_anterior" type="text" class="form-control"
+                    value="<?= $val('iglesia_anterior') ?>">
+                  <div class="invalid-feedback">Requerido.</div>
+                </div>
+
+                <div class="col-md-8">
+                  <label class="form-label">Razón de salida</label>
+                  <input name="razon_salida" type="text" class="form-control" value="<?= $val('razon_salida') ?>">
                 </div>
               </div>
 
