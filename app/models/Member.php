@@ -5,6 +5,7 @@ class Member {
     public $apellido_paterno;
     public $apellido_materno;
     public $edad;
+    public $curp;
     public $bautizado;
     public $nivel_academico;
     public $fecha_conversion;
@@ -24,6 +25,7 @@ class Member {
         $this->apellido_paterno = trim($data['apellido_paterno'] ?? '');
         $this->apellido_materno = trim($data['apellido_materno'] ?? '');
         $this->edad = isset($data['edad']) ? (int)$data['edad'] : null;
+        $this->curp = isset($data['curp']) ? strtoupper(trim($data['curp'])) : '';
         $this->bautizado = isset($data['bautizado']) ? 1 : 0;
         $this->nivel_academico = trim($data['nivel_academico'] ?? '');
         $this->fecha_conversion = $data['fecha_conversion'] ?? null;
@@ -40,7 +42,6 @@ class Member {
     }
 
     public static function occupations() {
-        // Lista amplia pero editable; puedes moverla a una tabla si lo prefieres.
         return [
             'Administrador/a','Abogado/a','Actor/Actriz','Agente de seguros','Agricultor/a','Albañil','Almacenista',
             'Analista de datos','Arquitecto/a','Artesano/a','Asistente administrativo','Barbero','Bibliotecario/a',
@@ -75,6 +76,12 @@ class Member {
         if (!filter_var($this->correo, FILTER_VALIDATE_EMAIL)) $errors[] = 'Correo electrónico inválido.';
         if ($this->edad !== null && ($this->edad < 0 || $this->edad > 120)) $errors[] = 'Edad fuera de rango.';
         if ($this->fecha_conversion && !preg_match('/^\d{4}-\d{2}-\d{2}$/', $this->fecha_conversion)) $errors[] = 'Fecha de conversión inválida.';
+
+        // ✅ Validar CURP (18 caracteres, formato oficial)
+        if ($this->curp === '' || !preg_match('/^[A-Z]{4}\d{6}[HM][A-Z]{5}[A-Z0-9]{2}$/', $this->curp)) {
+            $errors[] = 'CURP inválida. Debe tener 18 caracteres y seguir el formato correcto.';
+        }
+
         return $errors;
     }
 
@@ -83,10 +90,10 @@ class Member {
         $talentosArray = array_values(array_filter(array_map('trim', explode(',', $this->talentos)), fn($v) => $v !== ''));
 
         $sql = "INSERT INTO members
-            (nombres, apellido_paterno, apellido_materno, edad, bautizado, nivel_academico, fecha_conversion, ocupacion,
+            (nombres, apellido_paterno, apellido_materno, edad, curp, bautizado, nivel_academico, fecha_conversion, ocupacion,
             cursos, iglesia_anterior, razon_salida, talentos_json, correo, telefono, tipo_sangre, estado_civil, genero, created_at)
             VALUES
-            (:nombres, :apellido_paterno, :apellido_materno, :edad, :bautizado, :nivel_academico, :fecha_conversion, :ocupacion,
+            (:nombres, :apellido_paterno, :apellido_materno, :edad, :curp, :bautizado, :nivel_academico, :fecha_conversion, :ocupacion,
              :cursos, :iglesia_anterior, :razon_salida, :talentos_json, :correo, :telefono, :tipo_sangre, :estado_civil, :genero, NOW())";
 
         $stmt = $pdo->prepare($sql);
@@ -95,6 +102,7 @@ class Member {
             ':apellido_paterno' => $this->apellido_paterno,
             ':apellido_materno' => $this->apellido_materno,
             ':edad' => $this->edad,
+            ':curp' => $this->curp,
             ':bautizado' => $this->bautizado,
             ':nivel_academico' => $this->nivel_academico,
             ':fecha_conversion' => $this->fecha_conversion ?: null,
