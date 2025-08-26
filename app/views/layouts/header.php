@@ -13,6 +13,7 @@ $base = rtrim(BASE_URL, '/');
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
   <link rel="icon" sizes="64x64" href="assets/img/sin_background.png" />
   <link rel="apple-touch-icon" sizes="180x180" href="./assets/img/sin_background.png">  
+  <meta name="description" content="Ministerios Ebenezer Chalco MX - Registro de Memebresias.">
 </head>
 <body class="bg-light">
 <nav class="navbar navbar-expand-lg navbar-dark bg-gradient shadow-sm" style="background: #2c5d70;">

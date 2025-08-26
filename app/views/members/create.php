@@ -50,47 +50,53 @@ $val = fn($k, $d='') => htmlspecialchars($member->$k ?? $d, ENT_QUOTES, 'UTF-8')
                 </div>
                 <div class="col-md-4">
                   <label class="form-label form-section-title">Apellido materno</label>
-                  <input name="apellido_materno" type="text" class="form-control form-control-lg" value="<?= $val('apellido_materno') ?>">
+                  <input required name="apellido_materno" type="text" class="form-control form-control-lg" value="<?= $val('apellido_materno') ?>">
+                  <div class="invalid-feedback">Requerido.</div>
                 </div>
 
                 <div class="col-md-2">
                   <label class="form-label">Edad</label>
-                  <input name="edad" type="number" min="0" max="120" class="form-control" value="<?= $val('edad') ?>">
+                  <input required name="edad" type="number" min="0" max="120" class="form-control" value="<?= $val('edad') ?>">
+                  <div class="invalid-feedback">Edad inválida.</div>
                 </div>
                 <div class="col-md-5">
                   <label class="form-label">Fecha de Nacimiento</label>
-                  <input name="fecha_nacimiento" type="date" min="0" max="120" class="form-control" value="">
+                  <input required name="fecha_nacimiento" type="date" min="0" max="120" class="form-control" value="">
+                  <div class="invalid-feedback">Requerido.</div>
                 </div>
                 <div class="col-md-4">
                   <label class="form-label">CURP</label>
-                  <input name="curp" type="text" min="0" max="120" class="form-control" value="">
+                  <input required name="curp" type="text" min="0" max="120" class="form-control" value="">
+                  <div class="invalid-feedback">Requerido.</div>
                 </div>
 
                 <div class="col-md-3">
                   <label class="form-label">Bautizado</label>
                   <div class="form-check form-switch mt-1">
-                    <input name="bautizado" class="form-check-input" type="checkbox" <?= ($member->bautizado ?? 0) ? 'checked' : '' ?>>
+                    <input  required name="bautizado" class="form-check-input" type="checkbox" <?= ($member->bautizado ?? 0) ? 'checked' : '' ?>>
                     <label class="form-check-label">Sí</label>
                   </div>
                 </div>
 
                 <div class="col-md-6">
                   <label class="form-label">Nivel académico</label>
-                  <select name="nivel_academico" class="form-select">
+                  <select name="nivel_academico" class="form-select" required>
                     <?php foreach ($niveles as $op): ?>
                       <option value="<?= $op ?>" <?= (($member->nivel_academico ?? '') === $op) ? 'selected' : '' ?>><?= $op ?></option>
                     <?php endforeach; ?>
                   </select>
+                  <div class="invalid-feedback">Requerido.</div>
                 </div>
 
                 <div class="col-md-6">
                   <label class="form-label">Fecha de conversión</label>
-                  <input name="fecha_conversion" type="date" class="form-control" value="<?= $val('fecha_conversion') ?>">
+                  <input required name="fecha_conversion" type="date" class="form-control" value="<?= $val('fecha_conversion') ?>">
+                  <div class="invalid-feedback">Requerido.</div>
                 </div>
 
                 <div class="col-md-6">
                   <label class="form-label">Ocupación</label>
-                  <input list="ocupaciones" name="ocupacion" class="form-control" value="<?= $val('ocupacion') ?>" placeholder="Escribe o selecciona...">
+                  <input  required list="ocupaciones" name="ocupacion" class="form-control" value="<?= $val('ocupacion') ?>" placeholder="Escribe o selecciona...">
                   <datalist id="ocupaciones">
                     <?php foreach ($ocupaciones as $op): ?>
                       <option value="<?= htmlspecialchars($op, ENT_QUOTES, 'UTF-8') ?>"></option>
@@ -101,12 +107,14 @@ $val = fn($k, $d='') => htmlspecialchars($member->$k ?? $d, ENT_QUOTES, 'UTF-8')
 
                 <div class="col-md-6">
                   <label class="form-label">Cursos teológicos y/o discipulados</label>
-                  <input name="cursos" type="text" class="form-control" value="<?= $val('cursos') ?>" placeholder="Ej.: Teología 1, Discipulado básico">
+                  <input required name="cursos" type="text" class="form-control" value="<?= $val('cursos') ?>" placeholder="Ej.: Teología 1, Discipulado básico">
+                  <div class="invalid-feedback">Requerido.</div>
                 </div>
 
                 <div class="col-md-6">
                   <label class="form-label">Nombre de iglesia anterior</label>
                   <input name="iglesia_anterior" type="text" class="form-control" value="<?= $val('iglesia_anterior') ?>">
+                  <div class="invalid-feedback">Requerido.</div>
                 </div>
 
                 <div class="col-md-12">
@@ -116,8 +124,9 @@ $val = fn($k, $d='') => htmlspecialchars($member->$k ?? $d, ENT_QUOTES, 'UTF-8')
 
                 <div class="col-12">
                   <label class="form-label">Talentos y virtudes (separa con comas)</label>
-                  <input id="talentos" name="talentos" type="text" class="form-control" value="<?= $val('talentos') ?>" placeholder="Ej.: canto, liderazgo, servicio, enseñanza">
+                  <input  required id="talentos" name="talentos" type="text" class="form-control" value="<?= $val('talentos') ?>" placeholder="Ej.: canto, liderazgo, servicio, enseñanza">
                   <div id="talentosPreview" class="mt-2"></div>
+                  <div class="invalid-feedback">Requerido.</div>
                 </div>
 
                 <div class="col-md-6">
@@ -127,34 +136,38 @@ $val = fn($k, $d='') => htmlspecialchars($member->$k ?? $d, ENT_QUOTES, 'UTF-8')
                 </div>
                 <div class="col-md-6">
                   <label class="form-label">Número telefónico</label>
-                  <input name="telefono" type="tel" class="form-control" value="<?= $val('telefono') ?>">
+                  <input required name="telefono" type="tel" class="form-control" value="<?= $val('telefono') ?>">
+                  <div class="invalid-feedback">Requerido.</div>
                 </div>
 
                 <div class="col-md-4">
                   <label class="form-label">Tipo de sangre</label>
-                  <select name="tipo_sangre" class="form-select">
+                  <select required name="tipo_sangre" class="form-select">
                     <?php foreach ($tiposSangre as $op): ?>
                       <option value="<?= $op ?>" <?= (($member->tipo_sangre ?? '') === $op) ? 'selected' : '' ?>><?= $op ?></option>
                     <?php endforeach; ?>
                   </select>
+                  <div class="invalid-feedback">Requerido.</div>
                 </div>
 
                 <div class="col-md-4">
                   <label class="form-label">Estado civil</label>
-                  <select name="estado_civil" class="form-select">
+                  <select required name="estado_civil" class="form-select">
                     <?php foreach ($estadosCiviles as $op): ?>
                       <option value="<?= $op ?>" <?= (($member->estado_civil ?? '') === $op) ? 'selected' : '' ?>><?= $op ?></option>
                     <?php endforeach; ?>
                   </select>
+                  <div class="invalid-feedback">Requerido.</div>
                 </div>
 
                 <div class="col-md-4">
                   <label class="form-label">Género</label>
-                  <select name="genero" class="form-select">
+                  <select required name="genero" class="form-select">
                     <?php foreach ($generos as $op): ?>
                       <option value="<?= $op ?>" <?= (($member->genero ?? '') === $op) ? 'selected' : '' ?>><?= $op ?></option>
                     <?php endforeach; ?>
                   </select>
+                  <div class="invalid-feedback">Requerido.</div>
                 </div>
               </div>
 

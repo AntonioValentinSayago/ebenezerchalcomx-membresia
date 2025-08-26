@@ -56,16 +56,16 @@ class Member {
     }
 
     public static function educationLevels() {
-        return ['Sin escolaridad','Primaria','Secundaria','Preparatoria/Bachillerato','Técnico','Licenciatura','Maestría','Doctorado','Otro'];
+        return ['','Sin escolaridad','Primaria','Secundaria','Preparatoria/Bachillerato','Técnico','Licenciatura','Maestría','Doctorado','Otro'];
     }
     public static function bloodTypes() {
-        return ['A+','A-','B+','B-','AB+','AB-','O+','O-','No sabe'];
+        return ['','A+','A-','B+','B-','AB+','AB-','O+','O-','No sabe'];
     }
     public static function maritalStatuses() {
-        return ['Soltero/a','Casado/a','Unión libre','Divorciado/a','Viudo/a','Separado/a'];
+        return ['','Soltero/a','Casado/a','Unión libre','Divorciado/a','Viudo/a','Separado/a'];
     }
     public static function genders() {
-        return ['Femenino','Masculino','Prefiero no decir'];
+        return ['','Femenino','Masculino'];
     }
 
     public function validate() {
