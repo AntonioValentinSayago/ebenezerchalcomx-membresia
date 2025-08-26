@@ -189,6 +189,18 @@ $val = fn($k, $d = '') => htmlspecialchars($member->$k ?? $d, ENT_QUOTES, 'UTF-8
                   <label class="form-label">Razón de salida</label>
                   <input name="razon_salida" type="text" class="form-control" value="<?= $val('razon_salida') ?>">
                 </div>
+
+                <div class="col-12">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
+                    <label class="form-check-label" for="invalidCheck">
+                      Al registrarte, aceptas nuestra Política de Privacidad, que describe cómo recopilamos, usamos y protegemos tus datos.
+                    </label>
+                    <div class="invalid-feedback">
+                      Para continuar, acepta que estas de acuerdo.
+                    </div>
+                  </div>
+                </div>
               </div>
 
               <div class="d-flex align-items-center mt-4">
