@@ -9,6 +9,7 @@ class Member
     public $fecha_nacimiento;
     public $curp;
     public $bautizado;
+    public $cobertura;
     public $nivel_academico;
     public $fecha_conversion;
     public $ocupacion;
@@ -33,6 +34,7 @@ class Member
         $this->fecha_nacimiento = $data['fecha_nacimiento'] ?? null;
         $this->curp = isset($data['curp']) ? strtoupper(trim($data['curp'])) : '';
         $this->bautizado = isset($data['bautizado']) ? 1 : 0;
+        $this->cobertura = isset($data['cobertura']) ? 1 : 0;
         $this->nivel_academico = trim($data['nivel_academico'] ?? '');
         $this->fecha_conversion = $data['fecha_conversion'] ?? null;
         $this->ocupacion = trim($data['ocupacion'] ?? '');
@@ -181,10 +183,10 @@ class Member
         $talentosArray = array_values(array_filter(array_map('trim', explode(',', $this->talentos)), fn($v) => $v !== ''));
 
         $sql = "INSERT INTO members
-   (nombres, apellido_paterno, apellido_materno, edad, curp, bautizado, nivel_academico, fecha_conversion, fecha_nacimiento, ocupacion,
+   (nombres, apellido_paterno, apellido_materno, edad, curp, bautizado, cobertura, nivel_academico, fecha_conversion, fecha_nacimiento, ocupacion,
    cursos, iglesia_anterior, razon_salida, talentos_json, ministerios_json, correo, telefono, tipo_sangre, estado_civil, genero, created_at)
    VALUES
-   (:nombres, :apellido_paterno, :apellido_materno, :edad, :curp, :bautizado, :nivel_academico, :fecha_conversion, :fecha_nacimiento, :ocupacion,
+   (:nombres, :apellido_paterno, :apellido_materno, :edad, :curp, :bautizado, :cobertura, :nivel_academico, :fecha_conversion, :fecha_nacimiento, :ocupacion,
     :cursos, :iglesia_anterior, :razon_salida, :talentos_json, :ministerios_json, :correo, :telefono, :tipo_sangre, :estado_civil, :genero, NOW())";
 
 
@@ -197,6 +199,7 @@ class Member
             ':fecha_nacimiento' => $this->fecha_nacimiento ?: null,
             ':curp' => $this->curp,
             ':bautizado' => $this->bautizado,
+            ':cobertura' => $this->cobertura,
             ':nivel_academico' => $this->nivel_academico,
             ':fecha_conversion' => $this->fecha_conversion ?: null,
             ':ocupacion' => $this->ocupacion,

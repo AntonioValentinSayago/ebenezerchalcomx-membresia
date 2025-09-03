@@ -72,10 +72,19 @@ $val = fn($k, $d = '') => htmlspecialchars($member->$k ?? $d, ENT_QUOTES, 'UTF-8
                     value="<?= $val('edad') ?>">
                   <div class="invalid-feedback">Edad inválida.</div>
                 </div>
+
                 <div class="col-md-3">
                   <label class="form-label">Bautizado <span class="text-danger text-bold">*</span></label>
                   <div class="form-check form-switch mt-1">
                     <input required name="bautizado" class="form-check-input" type="checkbox" <?= ($member->bautizado ?? 0) ? 'checked' : '' ?>>
+                    <label class="form-check-label">Sí</label>
+                  </div>
+                </div>
+
+                <div class="col-md-3">
+                  <label class="form-label">Cobertura<span class="text-danger text-bold">*</span></label>
+                  <div class="form-check form-switch mt-1">
+                    <input required name="cobertura" class="form-check-input" type="checkbox" <?= ($member->cobertura ?? 0) ? 'checked' : '' ?>>
                     <label class="form-check-label">Sí</label>
                   </div>
                 </div>
