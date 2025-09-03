@@ -22,6 +22,8 @@ switch ($controller) {
             $ctrl->store();
         } elseif ($action === 'success') {
             $ctrl->success();
+        } elseif ($action === 'index') {
+            $ctrl->index();
         } else {
             http_response_code(404);
             echo 'Ruta no encontrada';
