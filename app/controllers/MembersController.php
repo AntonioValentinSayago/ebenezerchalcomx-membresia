@@ -62,8 +62,8 @@ class MembersController extends Controller
         // Obtener todos los registros
         $members = $memberModel->getAll();
 
-        // Cargar la vista
-        require __DIR__ . '/../views/index.php';
+        // Cargar la vista correcta
+        $this->view('members/index', compact('members'));
     }
 
 }
