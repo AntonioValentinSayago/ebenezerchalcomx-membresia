@@ -106,7 +106,7 @@ $val = fn($k, $d = '') => htmlspecialchars($member->$k ?? $d, ENT_QUOTES, 'UTF-8
 
                 <div class="col-md-6">
                   <label class="form-label">Fecha de conversión</label>
-                  <input required name="fecha_conversion" type="date" class="form-control"
+                  <input name="fecha_conversion" type="date" class="form-control"
                     value="<?= $val('fecha_conversion') ?>">
                   <div class="invalid-feedback">Requerido.</div>
                 </div>
