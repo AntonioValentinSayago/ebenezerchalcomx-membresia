@@ -24,7 +24,7 @@
                             <td><?= htmlspecialchars($m['nombres']) ?></td>
                             <td><?= htmlspecialchars($m['apellido_paterno'] . ' ' . $m['apellido_materno']) ?></td>
                             <td><?= htmlspecialchars($m['correo']) ?></td>
-                            <td><?= htmlspecialchars($m['cobertura']) ?></td>
+                            <td><span class="badge <?= htmlspecialchars(string: $m['cobertura'] == 1) ? 'bg-success">SI' : 'bg-danger">No'; ?></span></td>
                         </tr>
                     <?php endforeach; ?>
                 <?php else: ?>
