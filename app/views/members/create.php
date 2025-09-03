@@ -226,6 +226,19 @@ $val = fn($k, $d = '') => htmlspecialchars($member->$k ?? $d, ENT_QUOTES, 'UTF-8
 
                 const correoRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+                // --- Validación al enviar formulario ---
+                if (form) {
+                  form.addEventListener("submit", (e) => {
+                    let valido = true;
+
+                    if (correoInput && !correoRegex.test(correoInput.value)) {
+                      correoInput.classList.add("is-invalid");
+                      valido = false;
+                    }
+
+                    if (!valido) e.preventDefault();
+                  });
+                }
 
                 // --- Validación CORREO ---
                 if (correoInput) {
@@ -240,19 +253,6 @@ $val = fn($k, $d = '') => htmlspecialchars($member->$k ?? $d, ENT_QUOTES, 'UTF-8
                   });
                 }
 
-                // --- Validación al enviar formulario ---
-                if (form) {
-                  form.addEventListener("submit", (e) => {
-                    let valido = true;
-
-                    if (correoInput && !correoRegex.test(correoInput.value)) {
-                      correoInput.classList.add("is-invalid");
-                      valido = false;
-                    }
-
-                    if (!valido) e.preventDefault();
-                  });
-                }
               });
             </script>
 
