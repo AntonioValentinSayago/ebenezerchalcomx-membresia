@@ -221,7 +221,7 @@ class Member
     public function getAll()
     {
         $pdo = Database::getInstance()->getConnection();
-        $stmt = $pdo->query("SELECT id, nombres, apellido_paterno, apellido_materno, correo, telefono, curp FROM members ORDER BY id DESC");
+        $stmt = $pdo->query("SELECT * FROM members ORDER BY id DESC");
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 

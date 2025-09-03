@@ -13,11 +13,8 @@
                 <tr>
                     <th>Nombre</th>
                     <th>Apellidos</th>
-                    <th>Edad</th>
                     <th>Correo</th>
-                    <th>Teléfono</th>
-                    <th>Ocupación</th>
-                    <th>Estado Civil</th>
+                    <th>Cobertua</th>
                 </tr>
             </thead>
             <tbody id="membersTable">
@@ -26,11 +23,8 @@
                         <tr>
                             <td><?= htmlspecialchars($m['nombres']) ?></td>
                             <td><?= htmlspecialchars($m['apellido_paterno'] . ' ' . $m['apellido_materno']) ?></td>
-                            <td><?= htmlspecialchars($m['edad']) ?></td>
                             <td><?= htmlspecialchars($m['correo']) ?></td>
-                            <td><?= htmlspecialchars($m['telefono']) ?></td>
-                            <td><?= htmlspecialchars($m['ocupacion']) ?></td>
-                            <td><?= htmlspecialchars($m['estado_civil']) ?></td>
+                            <td><?= htmlspecialchars($m['cobertura']) ?></td>
                         </tr>
                     <?php endforeach; ?>
                 <?php else: ?>
