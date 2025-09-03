@@ -114,7 +114,7 @@ $val = fn($k, $d = '') => htmlspecialchars($member->$k ?? $d, ENT_QUOTES, 'UTF-8
 
                 <div class="col-md-12">
                   <label class="form-label" style="font-size: 14px;">Cursos teológicos y/o discipulados</label>
-                  <input required name="cursos" type="text" class="form-control" value="<?= $val('cursos') ?>"
+                  <input name="cursos" type="text" class="form-control" value="<?= $val('cursos') ?>"
                     placeholder="Ej.: Teología 1, Discipulado básico">
                   <div class="invalid-feedback">Requerido.</div>
                 </div>
