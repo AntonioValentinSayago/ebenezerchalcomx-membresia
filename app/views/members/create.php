@@ -126,6 +126,22 @@ $val = fn($k, $d = '') => htmlspecialchars($member->$k ?? $d, ENT_QUOTES, 'UTF-8
                   <div id="talentosPreview" class="mt-2"></div>
                   <div class="invalid-feedback">Requerido.</div>
                 </div>
+                <div class="col-md-6">
+                  <label class="form-label">Ministerios</label>
+                  <select name="ministerios[]" class="form-select" multiple required>
+                    <option value="Alabanza">Alabanza</option>
+                    <option value="Enseñanza">Enseñanza</option>
+                    <option value="Evangelismo">Evangelismo</option>
+                    <option value="Intercesión">Intercesión</option>
+                    <option value="Juventud">Juventud</option>
+                    <option value="Niños">Niños</option>
+                    <option value="Misiones">Misiones</option>
+                    <option value="Ujieres">Ujieres</option>
+                    <option value="Otro">Otro</option>
+                  </select>
+                  <div class="form-text">Mantén presionada la tecla CTRL (o CMD en Mac) para seleccionar varias
+                    opciones.</div>
+                </div>
 
                 <div class="col-md-6">
                   <label class="form-label">Correo electrónico <span class="text-danger text-bold">*</span></label>
@@ -176,7 +192,8 @@ $val = fn($k, $d = '') => htmlspecialchars($member->$k ?? $d, ENT_QUOTES, 'UTF-8
                   <div class="form-check">
                     <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
                     <label class="form-check-label" for="invalidCheck" style="font-weight: 100">
-                      Al registrarte, aceptas nuestra Política de Privacidad, que describe cómo recopilamos, usamos y protegemos tus datos.
+                      Al registrarte, aceptas nuestra Política de Privacidad, que describe cómo recopilamos, usamos y
+                      protegemos tus datos.
                     </label>
                     <div class="invalid-feedback">
                       Para continuar, acepta que estas de acuerdo.
