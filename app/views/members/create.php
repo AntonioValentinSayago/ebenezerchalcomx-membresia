@@ -144,10 +144,11 @@ $val = fn($k, $d = '') => htmlspecialchars($member->$k ?? $d, ENT_QUOTES, 'UTF-8
                 </div>
 
                 <div class="col-md-6">
-                  <label class="form-label">Correo electrónico <span class="text-danger text-bold">*</span></label>
-                  <input required name="correo" type="email" class="form-control" value="">
-                  <div class="invalid-feedback">Email Invalido.</div>
+                  <label class="form-label">Correo Electrónico <span class="text-danger">*</span></label>
+                  <input required name="correo" id="correo" type="email" class="form-control">
+                  <div id="correo-feedback" class="invalid-feedback">Requerido.</div>
                 </div>
+
 
                 <div class="col-md-6">
                   <label class="form-label">Número telefónico <span class="text-danger text-bold">*</span></label>
@@ -229,22 +230,46 @@ $val = fn($k, $d = '') => htmlspecialchars($member->$k ?? $d, ENT_QUOTES, 'UTF-8
                 const correoInput = document.querySelector("input[name='correo']");
                 const form = document.querySelector("form");
 
-                const curpRegex = /^[A-Z]{4}\d{6}[HM]{1}[A-Z]{5}[0-9A-Z]{2}$/;
                 const correoRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
                 // --- Validación CORREO ---
                 if (correoInput) {
                   correoInput.addEventListener("input", () => {
+                    const feedback = document.getElementById("correo-feedback");
+
                     if (correoRegex.test(correoInput.value)) {
+                      // ✅ Primero validamos el formato
                       correoInput.classList.remove("is-invalid");
                       correoInput.classList.add("is-valid");
+
+                      // 🔍 Ahora validamos en el servidor si existe
+                      fetch(`https://ebenezerchalcomx.site/public/index.php?controller=members&action=checkEmail&correo=${encodeURIComponent(correoInput.value)}`)
+                        .then(response => response.json())
+                        .then(data => {
+                          if (data.exists) {
+                            correoInput.classList.remove("is-valid");
+                            correoInput.classList.add("is-invalid");
+                            feedback.textContent = "Este correo ya está registrado.";
+                          } else {
+                            correoInput.classList.remove("is-invalid");
+                            correoInput.classList.add("is-valid");
+                            feedback.textContent = "";
+                          }
+                        })
+                        .catch(() => {
+                          correoInput.classList.remove("is-valid");
+                          correoInput.classList.add("is-invalid");
+                          feedback.textContent = "Error validando el correo.";
+                        });
+
                     } else {
+                      // ❌ Si no cumple regex
                       correoInput.classList.remove("is-valid");
                       correoInput.classList.add("is-invalid");
+                      feedback.textContent = "Formato de correo inválido.";
                     }
                   });
                 }
-
                 // --- Validación al enviar formulario ---
                 if (form) {
                   form.addEventListener("submit", (e) => {
@@ -257,6 +282,25 @@ $val = fn($k, $d = '') => htmlspecialchars($member->$k ?? $d, ENT_QUOTES, 'UTF-8
                     if (!valido) e.preventDefault();
                   });
                 }
+              });
+              const correoInput = document.querySelector("input[name='correo']");
+              const form = document.querySelector("form");
+
+              const correoRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+              // --- Validación CORREO ---
+              if (correoInput) {
+                correoInput.addEventListener("input", () => {
+                  if (correoRegex.test(correoInput.value)) {
+                    correoInput.classList.remove("is-invalid");
+                    correoInput.classList.add("is-valid");
+                  } else {
+                    correoInput.classList.remove("is-valid");
+                    correoInput.classList.add("is-invalid");
+                  }
+                });
+              }
+
               });
             </script>
           </div>

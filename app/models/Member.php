@@ -133,6 +133,26 @@ class Member
     {
         return ['', 'Femenino', 'Masculino'];
     }
+    public function checkEmail()
+    {
+        header('Content-Type: application/json');
+        $pdo = Database::getInstance()->getConnection();
+
+        $correo = $_GET['correo'] ?? '';
+        $correo = trim($correo);
+
+        if ($correo === '') {
+            echo json_encode(['exists' => false]);
+            return;
+        }
+
+        $stmt = $pdo->prepare("SELECT COUNT(*) FROM members WHERE correo = :correo");
+        $stmt->execute([':correo' => $correo]);
+        $exists = $stmt->fetchColumn() > 0;
+
+        echo json_encode(['exists' => $exists]);
+    }
+
 
     public function validate()
     {
