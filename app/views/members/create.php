@@ -127,20 +127,19 @@ $val = fn($k, $d = '') => htmlspecialchars($member->$k ?? $d, ENT_QUOTES, 'UTF-8
                   <div class="invalid-feedback">Requerido.</div>
                 </div>
                 <div class="col-md-6">
-                  <label class="form-label">Ministerios</label>
-                  <select name="ministerios[]" class="form-select" multiple required>
-                    <option value="Alabanza">Alabanza</option>
-                    <option value="Enseñanza">Enseñanza</option>
-                    <option value="Evangelismo">Evangelismo</option>
+                  <label class="form-label">Departamentos</label>
+                  <select name="ministerios[]" class="form-select" multiple>
+                    <option value="Servidores">Servidores</option>
+                    <option value="Adulam">Adulam</option>
+                    <option value="Multimedia">Multimedia</option>
+                    <option value="Bernabé">Bernabé</option>
                     <option value="Intercesión">Intercesión</option>
-                    <option value="Juventud">Juventud</option>
-                    <option value="Niños">Niños</option>
-                    <option value="Misiones">Misiones</option>
-                    <option value="Ujieres">Ujieres</option>
-                    <option value="Otro">Otro</option>
+                    <option value="Cafetería">Cafetería</option>
+                    <option value="Ebenekids">Ebenekids</option>
+                    <option value="Clinica-Lucas">Clinica Lucas</option>
+                    <option value="Audio">Audio</option>
+                    <option value="Ujieres">Talento</option>
                   </select>
-                  <div class="form-text">Mantén presionada la tecla CTRL (o CMD en Mac) para seleccionar varias
-                    opciones.</div>
                 </div>
 
                 <div class="col-md-6">
