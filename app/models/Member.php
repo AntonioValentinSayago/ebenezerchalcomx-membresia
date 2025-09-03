@@ -6,6 +6,7 @@ class Member
     public $apellido_paterno;
     public $apellido_materno;
     public $edad;
+    public $fecha_nacimiento;
     public $curp;
     public $bautizado;
     public $nivel_academico;
@@ -29,7 +30,8 @@ class Member
         $this->apellido_paterno = trim($data['apellido_paterno'] ?? '');
         $this->apellido_materno = trim($data['apellido_materno'] ?? '');
         $this->edad = isset($data['edad']) ? (int) $data['edad'] : null;
-        $this->curp = isset($data['curp']) ? strtoupper(trim($data['curp'])) : '';
+        $this->fecha_nacimiento = $data['fecha_nacimiento'] ?? null;
+        $this->curp = null;
         $this->bautizado = isset($data['bautizado']) ? 1 : 0;
         $this->nivel_academico = trim($data['nivel_academico'] ?? '');
         $this->fecha_conversion = $data['fecha_conversion'] ?? null;
@@ -145,11 +147,10 @@ class Member
             $errors[] = 'Edad fuera de rango.';
         if ($this->fecha_conversion && !preg_match('/^\d{4}-\d{2}-\d{2}$/', $this->fecha_conversion))
             $errors[] = 'Fecha de conversión inválida.';
-
-        // ✅ Validar CURP (18 caracteres, formato oficial)
-        if ($this->curp === '' || !preg_match('/^[A-Z]{4}\d{6}[HM][A-Z]{5}[A-Z0-9]{2}$/', $this->curp)) {
-            $errors[] = 'CURP inválida. Debe tener 18 caracteres y seguir el formato correcto.';
+        if ($this->fecha_nacimiento && !preg_match('/^\d{4}-\d{2}-\d{2}$/', $this->fecha_nacimiento)) {
+            $errors[] = 'Fecha de nacimiento inválida.';
         }
+
 
         return $errors;
     }
@@ -160,11 +161,12 @@ class Member
         $talentosArray = array_values(array_filter(array_map('trim', explode(',', $this->talentos)), fn($v) => $v !== ''));
 
         $sql = "INSERT INTO members
-   (nombres, apellido_paterno, apellido_materno, edad, curp, bautizado, nivel_academico, fecha_conversion, ocupacion,
+   (nombres, apellido_paterno, apellido_materno, edad, curp, bautizado, nivel_academico, fecha_conversion, fecha_nacimiento, ocupacion,
    cursos, iglesia_anterior, razon_salida, talentos_json, ministerios_json, correo, telefono, tipo_sangre, estado_civil, genero, created_at)
    VALUES
-   (:nombres, :apellido_paterno, :apellido_materno, :edad, :curp, :bautizado, :nivel_academico, :fecha_conversion, :ocupacion,
+   (:nombres, :apellido_paterno, :apellido_materno, :edad, :curp, :bautizado, :nivel_academico, :fecha_conversion, :fecha_nacimiento, :ocupacion,
     :cursos, :iglesia_anterior, :razon_salida, :talentos_json, :ministerios_json, :correo, :telefono, :tipo_sangre, :estado_civil, :genero, NOW())";
+
 
         $stmt = $pdo->prepare($sql);
         return $stmt->execute([
@@ -172,7 +174,8 @@ class Member
             ':apellido_paterno' => $this->apellido_paterno,
             ':apellido_materno' => $this->apellido_materno,
             ':edad' => $this->edad,
-            ':curp' => $this->curp,
+            ':fecha_nacimiento' => $this->fecha_nacimiento ?: null,
+            ':curp' => null,
             ':bautizado' => $this->bautizado,
             ':nivel_academico' => $this->nivel_academico,
             ':fecha_conversion' => $this->fecha_conversion ?: null,

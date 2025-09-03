@@ -62,9 +62,10 @@ $val = fn($k, $d = '') => htmlspecialchars($member->$k ?? $d, ENT_QUOTES, 'UTF-8
                 </div>
                 <div class="col-md-6">
                   <label class="form-label">Fecha de Nacimiento <span class="text-danger text-bold">*</span></label>
-                  <input required name="fecha_nacimiento" type="date" min="0" max="120" class="form-control" value="">
+                  <input required name="fecha_nacimiento" type="date" class="form-control" value="">
                   <div class="invalid-feedback">Requerido.</div>
                 </div>
+
                 <div class="col-md-3">
                   <label class="form-label">Edad <span class="text-danger text-bold">*</span></label>
                   <input required name="edad" type="number" min="0" max="120" class="form-control"
@@ -225,27 +226,11 @@ $val = fn($k, $d = '') => htmlspecialchars($member->$k ?? $d, ENT_QUOTES, 'UTF-8
               })();
 
               document.addEventListener("DOMContentLoaded", () => {
-                const curpInput = document.querySelector("input[name='curp']");
                 const correoInput = document.querySelector("input[name='correo']");
                 const form = document.querySelector("form");
 
                 const curpRegex = /^[A-Z]{4}\d{6}[HM]{1}[A-Z]{5}[0-9A-Z]{2}$/;
                 const correoRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-                // --- Validación CURP ---
-                if (curpInput) {
-                  curpInput.addEventListener("input", () => {
-                    curpInput.value = curpInput.value.toUpperCase();
-
-                    if (curpRegex.test(curpInput.value)) {
-                      curpInput.classList.remove("is-invalid");
-                      curpInput.classList.add("is-valid");
-                    } else {
-                      curpInput.classList.remove("is-valid");
-                      curpInput.classList.add("is-invalid");
-                    }
-                  });
-                }
 
                 // --- Validación CORREO ---
                 if (correoInput) {
@@ -264,12 +249,6 @@ $val = fn($k, $d = '') => htmlspecialchars($member->$k ?? $d, ENT_QUOTES, 'UTF-8
                 if (form) {
                   form.addEventListener("submit", (e) => {
                     let valido = true;
-
-                    if (curpInput && !curpRegex.test(curpInput.value)) {
-                      curpInput.classList.add("is-invalid");
-                      valido = false;
-                    }
-
                     if (correoInput && !correoRegex.test(correoInput.value)) {
                       correoInput.classList.add("is-invalid");
                       valido = false;
