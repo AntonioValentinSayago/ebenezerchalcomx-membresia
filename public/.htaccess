@@ -1,13 +1,9 @@
-# Activar mod_rewrite
+# public/.htaccess (opcional si usas Apache)
+Options -MultiViews
 RewriteEngine On
-RewriteBase /public/
 
-# Permitir acceder a archivos sin .php
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{REQUEST_FILENAME}\.php -f
-RewriteRule ^([^/]+)$ $1.php [L]
+# Redirigir todo a /public/index.php si el proyecto está en el docroot superior
+# Si instalas la carpeta 'public' como raíz pública, esto puede no ser necesario.
 
-# Mantener tu enrutamiento actual con index.php
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^ index.php [QSA,L]
+# Protección básica para evitar listar directorios (si el servidor lo permite)
+IndexIgnore *
