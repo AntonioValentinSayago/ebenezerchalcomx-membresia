@@ -31,7 +31,7 @@ class Member
         $this->apellido_materno = trim($data['apellido_materno'] ?? '');
         $this->edad = isset($data['edad']) ? (int) $data['edad'] : null;
         $this->fecha_nacimiento = $data['fecha_nacimiento'] ?? null;
-        $this->curp = null;
+        $this->curp = isset($data['curp']) ? strtoupper(trim($data['curp'])) : '';
         $this->bautizado = isset($data['bautizado']) ? 1 : 0;
         $this->nivel_academico = trim($data['nivel_academico'] ?? '');
         $this->fecha_conversion = $data['fecha_conversion'] ?? null;
@@ -175,7 +175,7 @@ class Member
             ':apellido_materno' => $this->apellido_materno,
             ':edad' => $this->edad,
             ':fecha_nacimiento' => $this->fecha_nacimiento ?: null,
-            ':curp' => null,
+            ':curp' => $this->curp,
             ':bautizado' => $this->bautizado,
             ':nivel_academico' => $this->nivel_academico,
             ':fecha_conversion' => $this->fecha_conversion ?: null,
