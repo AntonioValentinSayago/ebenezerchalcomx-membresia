@@ -1,61 +1,55 @@
-<!-- app/views/index.php -->
-<!DOCTYPE html>
-<html lang="es">
+<div class="container py-4">
+    <h2 class="mb-4 text-center">Hermanos Registrados</h2>
 
-<head>
-    <meta charset="UTF-8">
-    <title>Lista de Hermanos</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
+    <!-- Buscador en vivo -->
+    <div class="mb-3">
+        <input type="text" id="searchInput" class="form-control" placeholder="Buscar hermano...">
+    </div>
 
-<body class="p-4">
-
-    <div class="container">
-        <h2 class="mb-4">Hermanos Registrados</h2>
-
-        <!-- Barra de búsqueda -->
-        <input id="searchInput" type="text" class="form-control mb-3"
-            placeholder="Buscar por nombre, correo, teléfono o CURP...">
-
-        <!-- Tabla -->
-        <table class="table table-bordered table-hover">
-            <thead class="table-light">
+    <!-- Tabla responsiva -->
+    <div class="table-responsive shadow rounded">
+        <table class="table table-striped table-hover align-middle">
+            <thead class="table-dark">
                 <tr>
                     <th>Nombre</th>
+                    <th>Apellidos</th>
+                    <th>Edad</th>
                     <th>Correo</th>
                     <th>Teléfono</th>
-                    <th>CURP</th>
+                    <th>Ocupación</th>
+                    <th>Estado Civil</th>
                 </tr>
             </thead>
             <tbody id="membersTable">
-                <?php foreach ($members as $m): ?>
+                <?php if (!empty($members)): ?>
+                    <?php foreach ($members as $m): ?>
+                        <tr>
+                            <td><?= htmlspecialchars($m['nombres']) ?></td>
+                            <td><?= htmlspecialchars($m['apellido_paterno'] . ' ' . $m['apellido_materno']) ?></td>
+                            <td><?= htmlspecialchars($m['edad']) ?></td>
+                            <td><?= htmlspecialchars($m['correo']) ?></td>
+                            <td><?= htmlspecialchars($m['telefono']) ?></td>
+                            <td><?= htmlspecialchars($m['ocupacion']) ?></td>
+                            <td><?= htmlspecialchars($m['estado_civil']) ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                <?php else: ?>
                     <tr>
-                        <td><?= htmlspecialchars($m['nombres'] . ' ' . $m['apellido_paterno'] . ' ' . $m['apellido_materno']) ?>
-                        </td>
-                        <td><?= htmlspecialchars($m['correo']) ?></td>
-                        <td><?= htmlspecialchars($m['telefono']) ?></td>
-                        <td><?= htmlspecialchars($m['curp']) ?></td>
+                        <td colspan="7" class="text-center text-muted">No hay registros disponibles</td>
                     </tr>
-                <?php endforeach; ?>
+                <?php endif; ?>
             </tbody>
         </table>
     </div>
+</div>
 
-    <script>
-        // --- Búsqueda en vivo ---
-        document.addEventListener("DOMContentLoaded", () => {
-            const searchInput = document.getElementById("searchInput");
-            const rows = document.querySelectorAll("#membersTable tr");
-
-            searchInput.addEventListener("keyup", () => {
-                const query = searchInput.value.toLowerCase();
-                rows.forEach(row => {
-                    const text = row.textContent.toLowerCase();
-                    row.style.display = text.includes(query) ? "" : "none";
-                });
-            });
+<script>
+    // --- Buscador en vivo ---
+    document.getElementById("searchInput").addEventListener("keyup", function () {
+        const value = this.value.toLowerCase();
+        const rows = document.querySelectorAll("#membersTable tr");
+        rows.forEach(row => {
+            row.style.display = row.innerText.toLowerCase().includes(value) ? "" : "none";
         });
-    </script>
-</body>
-
-</html>
+    });
+</script>
