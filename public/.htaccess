@@ -1,13 +1,7 @@
-# Activar mod_rewrite
 RewriteEngine On
 RewriteBase /public/
 
-# Permitir acceder a archivos sin .php
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{REQUEST_FILENAME}\.php -f
-RewriteRule ^([^/]+)$ $1.php [L]
-
-# Mantener tu enrutamiento actual con index.php
+# Redirigir todo a index.php (salvo archivos reales)
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^ index.php [QSA,L]
