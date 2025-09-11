@@ -16,11 +16,7 @@
         <tr>
           <th>Nombre</th>
           <th>Apellidos</th>
-          <th>Edad</th>
           <th>Correo</th>
-          <th>Teléfono</th>
-          <th>Ocupación</th>
-          <th>Estado Civil</th>
           <th>Acciones</th>
         </tr>
       </thead>
@@ -30,11 +26,7 @@
             <tr>
               <td><?= htmlspecialchars($m['nombres']) ?></td>
               <td><?= htmlspecialchars($m['apellido_paterno'] . ' ' . $m['apellido_materno']) ?></td>
-              <td><?= htmlspecialchars($m['edad']) ?></td>
               <td><?= htmlspecialchars($m['correo']) ?></td>
-              <td><?= htmlspecialchars($m['telefono']) ?></td>
-              <td><?= htmlspecialchars($m['ocupacion']) ?></td>
-              <td><?= htmlspecialchars($m['estado_civil']) ?></td>
               <td>
                 <a href="<?= $base ?>/index.php?controller=members&action=edit&id=<?= $m['id'] ?>"
                    class="btn btn-sm btn-outline-primary me-1">
