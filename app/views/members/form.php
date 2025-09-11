@@ -1,126 +1,239 @@
-<div class="container mt-5">
-    <h2 class="mb-4">
-        <?= empty($member->id) ? 'Registrar nuevo miembro' : 'Editar miembro' ?>
-    </h2>
+<?php
+// Detectar si es edición o creación
+$isEdit = isset($member) && !empty($member->id);
+$action = $isEdit
+    ? "index.php?controller=members&action=update"
+    : "index.php?controller=members&action=store";
+$title = $isEdit ? "Editar Miembro" : "Registrar Nuevo Miembro";
+$buttonText = $isEdit ? "Actualizar" : "Guardar";
+?>
 
-    <?php if (!empty($errors)): ?>
+<div class="container mt-4">
+  <div class="card shadow-sm">
+    <div class="card-header bg-primary text-white fw-bold">
+      <?= $title ?>
+    </div>
+    <div class="card-body">
+      <?php if (!empty($errors)): ?>
         <div class="alert alert-danger">
-            <ul>
-                <?php foreach ($errors as $error): ?>
-                    <li><?= htmlspecialchars($error) ?></li>
-                <?php endforeach; ?>
-            </ul>
+          <ul class="mb-0">
+            <?php foreach ($errors as $error): ?>
+              <li><?= htmlspecialchars($error) ?></li>
+            <?php endforeach; ?>
+          </ul>
         </div>
-    <?php endif; ?>
+      <?php endif; ?>
 
-    <form method="post" action="<?= $action ?>" class="needs-validation" novalidate>
+      <form method="POST" action="<?= $action ?>">
         <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?? '' ?>">
-        <?php if (!empty($member->id)): ?>
-            <input type="hidden" name="id" value="<?= htmlspecialchars($member->id) ?>">
+        <?php if ($isEdit): ?>
+          <input type="hidden" name="id" value="<?= htmlspecialchars($member->id) ?>">
         <?php endif; ?>
 
-        <!-- Nombre -->
-        <div class="mb-3">
-            <label for="nombre" class="form-label">Nombre</label>
-            <input type="text" class="form-control" id="nombre" name="nombre"
-                value="<?= htmlspecialchars($member->nombre ?? '') ?>" required>
+        <div class="row">
+          <!-- Nombres -->
+          <div class="col-md-4 mb-3">
+            <label class="form-label">Nombres</label>
+            <input type="text" name="nombres" class="form-control"
+                   value="<?= htmlspecialchars($member->nombres ?? '') ?>" required>
+          </div>
+
+          <!-- Apellido Paterno -->
+          <div class="col-md-4 mb-3">
+            <label class="form-label">Apellido Paterno</label>
+            <input type="text" name="apellido_paterno" class="form-control"
+                   value="<?= htmlspecialchars($member->apellido_paterno ?? '') ?>" required>
+          </div>
+
+          <!-- Apellido Materno -->
+          <div class="col-md-4 mb-3">
+            <label class="form-label">Apellido Materno</label>
+            <input type="text" name="apellido_materno" class="form-control"
+                   value="<?= htmlspecialchars($member->apellido_materno ?? '') ?>">
+          </div>
         </div>
 
-        <!-- Apellido -->
-        <div class="mb-3">
-            <label for="apellido" class="form-label">Apellido</label>
-            <input type="text" class="form-control" id="apellido" name="apellido"
-                value="<?= htmlspecialchars($member->apellido ?? '') ?>" required>
+        <div class="row">
+          <!-- Edad -->
+          <div class="col-md-2 mb-3">
+            <label class="form-label">Edad</label>
+            <input type="number" name="edad" class="form-control"
+                   value="<?= htmlspecialchars($member->edad ?? '') ?>">
+          </div>
+
+          <!-- Fecha de Nacimiento -->
+          <div class="col-md-4 mb-3">
+            <label class="form-label">Fecha de Nacimiento</label>
+            <input type="date" name="fecha_nacimiento" class="form-control"
+                   value="<?= htmlspecialchars($member->fecha_nacimiento ?? '') ?>">
+          </div>
+
+          <!-- CURP -->
+          <div class="col-md-6 mb-3">
+            <label class="form-label">CURP</label>
+            <input type="text" name="curp" maxlength="18" class="form-control"
+                   value="<?= htmlspecialchars($member->curp ?? '') ?>">
+          </div>
         </div>
 
-        <!-- Correo -->
-        <div class="mb-3">
-            <label for="correo" class="form-label">Correo</label>
-            <input type="email" class="form-control" id="correo" name="correo"
-                value="<?= htmlspecialchars($member->correo ?? '') ?>" required>
+        <div class="row">
+          <!-- Correo -->
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Correo</label>
+            <input type="email" name="correo" class="form-control"
+                   value="<?= htmlspecialchars($member->correo ?? '') ?>">
+          </div>
+
+          <!-- Teléfono -->
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Teléfono</label>
+            <input type="text" name="telefono" class="form-control"
+                   value="<?= htmlspecialchars($member->telefono ?? '') ?>">
+          </div>
         </div>
 
-        <!-- CURP -->
-        <div class="mb-3">
-            <label for="curp" class="form-label">CURP</label>
-            <input type="text" class="form-control" id="curp" name="curp"
-                value="<?= htmlspecialchars($member->curp ?? '') ?>">
+        <div class="row">
+          <!-- Bautizado -->
+          <div class="col-md-2 mb-3">
+            <div class="form-check mt-4">
+              <input type="checkbox" name="bautizado" class="form-check-input"
+                     <?= !empty($member->bautizado) ? 'checked' : '' ?>>
+              <label class="form-check-label">Bautizado</label>
+            </div>
+          </div>
+
+          <!-- Cobertura -->
+          <div class="col-md-2 mb-3">
+            <div class="form-check mt-4">
+              <input type="checkbox" name="cobertura" class="form-check-input"
+                     <?= !empty($member->cobertura) ? 'checked' : '' ?>>
+              <label class="form-check-label">Cobertura</label>
+            </div>
+          </div>
+
+          <!-- Fecha de Conversión -->
+          <div class="col-md-4 mb-3">
+            <label class="form-label">Fecha de Conversión</label>
+            <input type="date" name="fecha_conversion" class="form-control"
+                   value="<?= htmlspecialchars($member->fecha_conversion ?? '') ?>">
+          </div>
         </div>
 
-        <!-- Ocupación -->
-        <div class="mb-3">
-            <label for="ocupacion" class="form-label">Ocupación</label>
-            <select class="form-select" id="ocupacion" name="ocupacion" required>
-                <option value="">Seleccione...</option>
-                <?php foreach ($ocupaciones as $op): ?>
-                    <option value="<?= htmlspecialchars($op) ?>" <?= ($member->ocupacion ?? '') === $op ? 'selected' : '' ?>>
-                        <?= htmlspecialchars($op) ?>
-                    </option>
-                <?php endforeach; ?>
+        <div class="row">
+          <!-- Nivel académico -->
+          <div class="col-md-4 mb-3">
+            <label class="form-label">Nivel Académico</label>
+            <select name="nivel_academico" class="form-select">
+              <?php foreach ($niveles as $nivel): ?>
+                <option value="<?= htmlspecialchars($nivel) ?>"
+                  <?= (isset($member->nivel_academico) && $member->nivel_academico === $nivel) ? 'selected' : '' ?>>
+                  <?= htmlspecialchars($nivel) ?>
+                </option>
+              <?php endforeach; ?>
             </select>
-        </div>
+          </div>
 
-        <!-- Nivel educativo -->
-        <div class="mb-3">
-            <label for="nivel_educativo" class="form-label">Nivel educativo</label>
-            <select class="form-select" id="nivel_educativo" name="nivel_educativo" required>
-                <option value="">Seleccione...</option>
-                <?php foreach ($niveles as $op): ?>
-                    <option value="<?= htmlspecialchars($op) ?>" <?= ($member->nivel_educativo ?? '') === $op ? 'selected' : '' ?>>
-                        <?= htmlspecialchars($op) ?>
-                    </option>
-                <?php endforeach; ?>
+          <!-- Ocupación -->
+          <div class="col-md-4 mb-3">
+            <label class="form-label">Ocupación</label>
+            <select name="ocupacion" class="form-select">
+              <?php foreach ($ocupaciones as $ocupacion): ?>
+                <option value="<?= htmlspecialchars($ocupacion) ?>"
+                  <?= (isset($member->ocupacion) && $member->ocupacion === $ocupacion) ? 'selected' : '' ?>>
+                  <?= htmlspecialchars($ocupacion) ?>
+                </option>
+              <?php endforeach; ?>
             </select>
-        </div>
+          </div>
 
-        <!-- Estado civil -->
-        <div class="mb-3">
-            <label for="estado_civil" class="form-label">Estado civil</label>
-            <select class="form-select" id="estado_civil" name="estado_civil" required>
-                <option value="">Seleccione...</option>
-                <?php foreach ($estadosCiviles as $op): ?>
-                    <option value="<?= htmlspecialchars($op) ?>" <?= ($member->estado_civil ?? '') === $op ? 'selected' : '' ?>>
-                        <?= htmlspecialchars($op) ?>
-                    </option>
-                <?php endforeach; ?>
+          <!-- Tipo de Sangre -->
+          <div class="col-md-4 mb-3">
+            <label class="form-label">Tipo de Sangre</label>
+            <select name="tipo_sangre" class="form-select">
+              <?php foreach ($tiposSangre as $tipo): ?>
+                <option value="<?= htmlspecialchars($tipo) ?>"
+                  <?= (isset($member->tipo_sangre) && $member->tipo_sangre === $tipo) ? 'selected' : '' ?>>
+                  <?= htmlspecialchars($tipo) ?>
+                </option>
+              <?php endforeach; ?>
             </select>
+          </div>
         </div>
 
-        <!-- Sangre -->
-        <div class="mb-3">
-            <label for="tipo_sangre" class="form-label">Tipo de sangre</label>
-            <select class="form-select" id="tipo_sangre" name="tipo_sangre">
-                <option value="">Seleccione...</option>
-                <?php foreach ($tiposSangre as $op): ?>
-                    <option value="<?= htmlspecialchars($op) ?>" <?= ($member->tipo_sangre ?? '') === $op ? 'selected' : '' ?>>
-                        <?= htmlspecialchars($op) ?>
-                    </option>
-                <?php endforeach; ?>
+        <div class="row">
+          <!-- Estado Civil -->
+          <div class="col-md-4 mb-3">
+            <label class="form-label">Estado Civil</label>
+            <select name="estado_civil" class="form-select">
+              <?php foreach ($estadosCiviles as $estado): ?>
+                <option value="<?= htmlspecialchars($estado) ?>"
+                  <?= (isset($member->estado_civil) && $member->estado_civil === $estado) ? 'selected' : '' ?>>
+                  <?= htmlspecialchars($estado) ?>
+                </option>
+              <?php endforeach; ?>
             </select>
-        </div>
+          </div>
 
-        <!-- Género -->
-        <div class="mb-3">
-            <label for="genero" class="form-label">Género</label>
-            <select class="form-select" id="genero" name="genero" required>
-                <option value="">Seleccione...</option>
-                <?php foreach ($generos as $op): ?>
-                    <option value="<?= htmlspecialchars($op) ?>" <?= ($member->genero ?? '') === $op ? 'selected' : '' ?>>
-                        <?= htmlspecialchars($op) ?>
-                    </option>
-                <?php endforeach; ?>
+          <!-- Género -->
+          <div class="col-md-4 mb-3">
+            <label class="form-label">Género</label>
+            <select name="genero" class="form-select">
+              <?php foreach ($generos as $gen): ?>
+                <option value="<?= htmlspecialchars($gen) ?>"
+                  <?= (isset($member->genero) && $member->genero === $gen) ? 'selected' : '' ?>>
+                  <?= htmlspecialchars($gen) ?>
+                </option>
+              <?php endforeach; ?>
             </select>
+          </div>
         </div>
 
-        <!-- Botón -->
-        <button type="submit" class="btn btn-lg btn-success">
-            <i class="bi bi-save"></i>
-            <?= empty($member->id) ? 'Guardar registro' : 'Actualizar registro' ?>
-        </button>
+        <div class="row">
+          <!-- Iglesia Anterior -->
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Iglesia Anterior</label>
+            <input type="text" name="iglesia_anterior" class="form-control"
+                   value="<?= htmlspecialchars($member->iglesia_anterior ?? '') ?>">
+          </div>
 
-        <!-- Link de regreso -->
-        <a href="<?= $base ?>/index.php?controller=members&action=index" class="btn btn-secondary btn-lg">
-            <i class="bi bi-arrow-left"></i> Regresar a la lista
-        </a>
-    </form>
+          <!-- Razón de Salida -->
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Razón de Salida</label>
+            <input type="text" name="razon_salida" class="form-control"
+                   value="<?= htmlspecialchars($member->razon_salida ?? '') ?>">
+          </div>
+        </div>
+
+        <div class="row">
+          <!-- Cursos -->
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Cursos</label>
+            <input type="text" name="cursos" class="form-control"
+                   value="<?= htmlspecialchars($member->cursos ?? '') ?>">
+          </div>
+
+          <!-- Talentos -->
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Talentos (separados por coma)</label>
+            <input type="text" name="talentos" class="form-control"
+                   value="<?= htmlspecialchars($member->talentos ?? '') ?>">
+          </div>
+        </div>
+
+        <div class="row">
+          <!-- Ministerios -->
+          <div class="col-md-12 mb-3">
+            <label class="form-label">Ministerios (separados por coma)</label>
+            <input type="text" name="ministerios[]" class="form-control"
+                   value="<?= isset($member->ministerios) ? implode(',', json_decode($member->ministerios, true)) : '' ?>">
+          </div>
+        </div>
+
+        <div class="text-end">
+          <a href="index.php?controller=members&action=index" class="btn btn-secondary">Cancelar</a>
+          <button type="submit" class="btn btn-success"><?= $buttonText ?></button>
+        </div>
+      </form>
+    </div>
+  </div>
 </div>
