@@ -3,7 +3,8 @@
 
 class Member
 {
-    public $id; // ← Agrega esta línea ✅
+    public $id; // ← ¡Clave primaria para edición!
+
     public $nombres;
     public $apellido_paterno;
     public $apellido_materno;
@@ -18,7 +19,7 @@ class Member
     public $cursos;
     public $iglesia_anterior;
     public $razon_salida;
-    public $talentos; // cadena separada por comas
+    public $talentos;
     public $ministerios;
 
     public $correo;
@@ -29,6 +30,8 @@ class Member
 
     public function __construct($data = [])
     {
+        $this->id = $data['id'] ?? null; // ✅ importante para el modo "edit"
+
         $this->nombres = trim($data['nombres'] ?? '');
         $this->apellido_paterno = trim($data['apellido_paterno'] ?? '');
         $this->apellido_materno = trim($data['apellido_materno'] ?? '');
@@ -44,7 +47,10 @@ class Member
         $this->iglesia_anterior = trim($data['iglesia_anterior'] ?? '');
         $this->razon_salida = trim($data['razon_salida'] ?? '');
         $this->talentos = trim($data['talentos'] ?? '');
-        $this->ministerios = isset($data['ministerios']) ? json_encode($data['ministerios'], JSON_UNESCAPED_UNICODE) : json_encode([]);
+        $this->ministerios = isset($data['ministerios'])
+            ? json_encode($data['ministerios'], JSON_UNESCAPED_UNICODE)
+            : json_encode([]);
+
         $this->correo = trim($data['correo'] ?? '');
         $this->telefono = trim($data['telefono'] ?? '');
         $this->tipo_sangre = trim($data['tipo_sangre'] ?? '');
@@ -55,18 +61,69 @@ class Member
     public static function occupations()
     {
         return [
-            'Administrador/a', 'Abogado/a', 'Actor/Actriz', 'Agente de seguros', 'Agricultor/a',
-            'Albañil', 'Almacenista', 'Analista de datos', 'Arquitecto/a', 'Artesano/a',
-            'Asistente administrativo', 'Barbero', 'Bibliotecario/a', 'Biólogo/a', 'Bombero',
-            'Cajero/a', 'Carpintero/a', 'Chef', 'Chofer', 'Científico/a', 'Comerciante',
-            'Comunicólogo/a', 'Contador/a', 'Costurero/a', 'Dentista', 'Desarrollador/a de software',
-            'Diseñador/a gráfico', 'Docente/Profesor/a', 'Electricista', 'Enfermero/a',
-            'Entrenador/a', 'Estudiante', 'Farmacéutico/a', 'Fotógrafo/a', 'Gerente',
-            'Ingeniero/a civil', 'Ingeniero/a industrial', 'Ingeniero/a sistemas', 'Inspector/a',
-            'Jardinero/a', 'Jornalero/a', 'Mecánico/a', 'Médico/a', 'Mesero/a', 'Músico/a',
-            'Panadero/a', 'Pastor/a', 'Peluquero/a', 'Periodista', 'Pescador/a', 'Plomero',
-            'Policía', 'Psicólogo/a', 'Publicista', 'Recepcionista', 'Repartidor/a', 'Soldador/a',
-            'Técnico/a', 'Traductor/a', 'Vendedor/a', 'Veterinario/a', 'Ama de casa', 'Otro'
+            'Administrador/a',
+            'Abogado/a',
+            'Actor/Actriz',
+            'Agente de seguros',
+            'Agricultor/a',
+            'Albañil',
+            'Almacenista',
+            'Analista de datos',
+            'Arquitecto/a',
+            'Artesano/a',
+            'Asistente administrativo',
+            'Barbero',
+            'Bibliotecario/a',
+            'Biólogo/a',
+            'Bombero',
+            'Cajero/a',
+            'Carpintero/a',
+            'Chef',
+            'Chofer',
+            'Científico/a',
+            'Comerciante',
+            'Comunicólogo/a',
+            'Contador/a',
+            'Costurero/a',
+            'Dentista',
+            'Desarrollador/a de software',
+            'Diseñador/a gráfico',
+            'Docente/Profesor/a',
+            'Electricista',
+            'Enfermero/a',
+            'Entrenador/a',
+            'Estudiante',
+            'Farmacéutico/a',
+            'Fotógrafo/a',
+            'Gerente',
+            'Ingeniero/a civil',
+            'Ingeniero/a industrial',
+            'Ingeniero/a sistemas',
+            'Inspector/a',
+            'Jardinero/a',
+            'Jornalero/a',
+            'Mecánico/a',
+            'Médico/a',
+            'Mesero/a',
+            'Músico/a',
+            'Panadero/a',
+            'Pastor/a',
+            'Peluquero/a',
+            'Periodista',
+            'Pescador/a',
+            'Plomero',
+            'Policía',
+            'Psicólogo/a',
+            'Publicista',
+            'Recepcionista',
+            'Repartidor/a',
+            'Soldador/a',
+            'Técnico/a',
+            'Traductor/a',
+            'Vendedor/a',
+            'Veterinario/a',
+            'Ama de casa',
+            'Otro'
         ];
     }
 
@@ -93,12 +150,18 @@ class Member
     public function validate()
     {
         $errors = [];
-        if ($this->nombres === '') $errors[] = 'El nombre es obligatorio.';
-        if ($this->apellido_paterno === '') $errors[] = 'El apellido paterno es obligatorio.';
-        if (!empty($this->correo) && !filter_var($this->correo, FILTER_VALIDATE_EMAIL)) $errors[] = 'Correo electrónico inválido.';
-        if ($this->edad !== null && ($this->edad < 0 || $this->edad > 120)) $errors[] = 'Edad fuera de rango.';
-        if ($this->fecha_conversion && !preg_match('/^\d{4}-\d{2}-\d{2}$/', $this->fecha_conversion)) $errors[] = 'Fecha de conversión inválida.';
-        if ($this->fecha_nacimiento && !preg_match('/^\d{4}-\d{2}-\d{2}$/', $this->fecha_nacimiento)) $errors[] = 'Fecha de nacimiento inválida.';
+        if ($this->nombres === '')
+            $errors[] = 'El nombre es obligatorio.';
+        if ($this->apellido_paterno === '')
+            $errors[] = 'El apellido paterno es obligatorio.';
+        if (!empty($this->correo) && !filter_var($this->correo, FILTER_VALIDATE_EMAIL))
+            $errors[] = 'Correo electrónico inválido.';
+        if ($this->edad !== null && ($this->edad < 0 || $this->edad > 120))
+            $errors[] = 'Edad fuera de rango.';
+        if ($this->fecha_conversion && !preg_match('/^\d{4}-\d{2}-\d{2}$/', $this->fecha_conversion))
+            $errors[] = 'Fecha de conversión inválida.';
+        if ($this->fecha_nacimiento && !preg_match('/^\d{4}-\d{2}-\d{2}$/', $this->fecha_nacimiento))
+            $errors[] = 'Fecha de nacimiento inválida.';
         return $errors;
     }
 
