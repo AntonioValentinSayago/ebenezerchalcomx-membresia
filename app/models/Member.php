@@ -3,6 +3,7 @@
 
 class Member
 {
+    public $id; // ← Agrega esta línea ✅
     public $nombres;
     public $apellido_paterno;
     public $apellido_materno;
