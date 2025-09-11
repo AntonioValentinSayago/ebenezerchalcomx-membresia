@@ -120,7 +120,7 @@ $action = $action ?? "$base/index.php?controller=members&action=store";
                 </div>
                 <div class="col-md-6">
                   <label class="form-label">Correo electrónico *</label>
-                  <input required name="correo" type="email" class="form-control" value="<?= $val('correo') ?>">
+                  <input name="correo" type="email" class="form-control" value="<?= $val('correo') ?>">
                 </div>
                 <div class="col-md-6">
                   <label class="form-label">Teléfono *</label>
