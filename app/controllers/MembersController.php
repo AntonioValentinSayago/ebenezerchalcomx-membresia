@@ -2,9 +2,15 @@
 // app/controllers/MembersController.php
 class MembersController extends Controller
 {
+    public function index()
+    {
+        $memberModel = new Member();
+        $members = $memberModel->getAll();
+        $this->view('members/index', compact('members'));
+    }
+
     public function create()
     {
-        // Generar CSRF token
         if (empty($_SESSION['csrf_token'])) {
             $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
         }
@@ -13,57 +19,59 @@ class MembersController extends Controller
         $tiposSangre = Member::bloodTypes();
         $estadosCiviles = Member::maritalStatuses();
         $generos = Member::genders();
-        $this->view('members/create', compact('ocupaciones', 'niveles', 'tiposSangre', 'estadosCiviles', 'generos'));
+        $this->view('members/create', compact('ocupaciones','niveles','tiposSangre','estadosCiviles','generos'));
     }
 
     public function store()
     {
-        if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== ($_SESSION['csrf_token'] ?? '')) {
-            http_response_code(403);
+        if ($_POST['csrf_token'] !== ($_SESSION['csrf_token'] ?? '')) {
             die('CSRF token inválido.');
         }
         $member = new Member($_POST);
         $errors = $member->validate();
         if (!empty($errors)) {
-            // Re-render con errores
-            $ocupaciones = Member::occupations();
-            $niveles = Member::educationLevels();
-            $tiposSangre = Member::bloodTypes();
-            $estadosCiviles = Member::maritalStatuses();
-            $generos = Member::genders();
-            $this->view('members/create', compact('ocupaciones', 'niveles', 'tiposSangre', 'estadosCiviles', 'generos', 'errors', 'member'));
+            $this->view('members/create', compact('errors','member'));
             return;
         }
-        if ($member->save()) {
-            $this->redirect('index.php?controller=members&action=success');
-        } else {
-            $errors = ['No se pudo guardar el registro. Intenta de nuevo.'];
-            $ocupaciones = Member::occupations();
-            $niveles = Member::educationLevels();
-            $tiposSangre = Member::bloodTypes();
-            $estadosCiviles = Member::maritalStatuses();
-            $generos = Member::genders();
-            $this->view('members/create', compact('ocupaciones', 'niveles', 'tiposSangre', 'estadosCiviles', 'generos', 'errors', 'member'));
+        $member->save();
+        $this->redirect('index.php?controller=members&action=index');
+    }
+
+    public function edit()
+    {
+        $id = $_GET['id'] ?? null;
+        $member = Member::findById($id);
+        if (!$member) die("Miembro no encontrado");
+
+        $ocupaciones = Member::occupations();
+        $niveles = Member::educationLevels();
+        $tiposSangre = Member::bloodTypes();
+        $estadosCiviles = Member::maritalStatuses();
+        $generos = Member::genders();
+
+        $this->view('members/edit', compact('member','ocupaciones','niveles','tiposSangre','estadosCiviles','generos'));
+    }
+
+    public function update()
+    {
+        if ($_POST['csrf_token'] !== ($_SESSION['csrf_token'] ?? '')) {
+            die('CSRF token inválido.');
         }
+        $member = new Member($_POST);
+        $member->id = $_POST['id'];
+        $errors = $member->validate();
+        if (!empty($errors)) {
+            $this->view('members/edit', compact('errors','member'));
+            return;
+        }
+        $member->update();
+        $this->redirect('index.php?controller=members&action=index');
     }
 
-    public function success()
+    public function delete()
     {
-        $this->view('members/success');
+        $id = $_GET['id'] ?? null;
+        if ($id) Member::delete($id);
+        $this->redirect('index.php?controller=members&action=index');
     }
-
-    // app/controllers/MembersController.php
-
-    public function index()
-    {
-        require_once __DIR__ . '/../models/Member.php';
-        $memberModel = new Member();
-
-        // Obtener todos los registros
-        $members = $memberModel->getAll();
-
-        // Cargar la vista correcta
-        $this->view('members/index', compact('members'));
-    }
-
 }
