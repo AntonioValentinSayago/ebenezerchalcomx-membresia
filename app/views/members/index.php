@@ -1,5 +1,4 @@
 <!-- app/views/members/index.php -->
-<?php require __DIR__ . '/../layouts/header.php'; ?>
 
 <div class="container py-4">
     <h2 class="mb-4 text-center">Hermanos Registrados</h2>
