@@ -8,9 +8,9 @@ require __DIR__ . '/../app/core/Controller.php';
 require __DIR__ . '/../app/controllers/MembersController.php';
 require __DIR__ . '/../app/models/Member.php';
 
-// Enrutamiento simple por query string: ?controller=members&action=create
+// ✅ Corregido: acción por defecto es "index", no "create"
 $controller = $_GET['controller'] ?? 'members';
-$action = $_GET['action'] ?? 'create';
+$action = $_GET['action'] ?? 'index';
 
 switch ($controller) {
     case 'members':
@@ -20,6 +20,12 @@ switch ($controller) {
             $ctrl->create();
         } elseif ($action === 'store' && $_SERVER['REQUEST_METHOD'] === 'POST') {
             $ctrl->store();
+        } elseif ($action === 'edit') {
+            $ctrl->edit();
+        } elseif ($action === 'update' && $_SERVER['REQUEST_METHOD'] === 'POST') {
+            $ctrl->update();
+        } elseif ($action === 'delete') {
+            $ctrl->delete();
         } elseif ($action === 'success') {
             $ctrl->success();
         } elseif ($action === 'index') {
