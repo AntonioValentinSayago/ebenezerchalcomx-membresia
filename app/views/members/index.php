@@ -22,7 +22,7 @@
             <tbody>
                 <?php if (!empty($members) && is_array($members)): ?>
                     <?php foreach ($members as $m): ?>
-                        <tr>
+                        <tr class="<?= empty($m['correo']) ? 'table-warning' : '' ?>">
                             <td><?= htmlspecialchars($m['nombres'] ?? '') ?></td>
                             <td><?= htmlspecialchars(($m['apellido_paterno'] ?? '') . ' ' . ($m['apellido_materno'] ?? '')) ?>
                             </td>
@@ -46,6 +46,7 @@
                     </tr>
                 <?php endif; ?>
             </tbody>
+
         </table>
     </div>
 </div>

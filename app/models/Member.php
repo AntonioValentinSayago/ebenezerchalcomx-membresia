@@ -163,8 +163,9 @@ class Member
             $errors[] = 'El nombre es obligatorio.';
         if ($this->apellido_paterno === '')
             $errors[] = 'El apellido paterno es obligatorio.';
-        if (!filter_var($this->correo, FILTER_VALIDATE_EMAIL))
+        if (!empty($this->correo) && !filter_var($this->correo, FILTER_VALIDATE_EMAIL)) {
             $errors[] = 'Correo electrónico inválido.';
+        }
         if ($this->edad !== null && ($this->edad < 0 || $this->edad > 120))
             $errors[] = 'Edad fuera de rango.';
         if ($this->fecha_conversion && !preg_match('/^\d{4}-\d{2}-\d{2}$/', $this->fecha_conversion))
@@ -197,7 +198,7 @@ class Member
             ':apellido_materno' => $this->apellido_materno,
             ':edad' => $this->edad,
             ':fecha_nacimiento' => $this->fecha_nacimiento ?: null,
-            ':curp' => $this->curp,
+            ':correo' => !empty($this->correo) ? $this->correo : null,
             ':bautizado' => $this->bautizado,
             ':cobertura' => $this->cobertura,
             ':nivel_academico' => $this->nivel_academico,
@@ -261,7 +262,7 @@ class Member
             ':apellido_materno' => $this->apellido_materno,
             ':edad' => $this->edad,
             ':fecha_nacimiento' => $this->fecha_nacimiento ?: null,
-            ':curp' => $this->curp,
+            ':correo' => !empty($this->correo) ? $this->correo : null,
             ':bautizado' => $this->bautizado,
             ':cobertura' => $this->cobertura,
             ':nivel_academico' => $this->nivel_academico,
