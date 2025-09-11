@@ -42,7 +42,7 @@
           <?php endforeach; ?>
         <?php else: ?>
           <tr>
-            <td colspan="8" class="text-center text-muted">No hay registros disponibles</td>
+            <td colspan="4" class="text-center text-muted">No hay registros disponibles</td>
           </tr>
         <?php endif; ?>
       </tbody>
