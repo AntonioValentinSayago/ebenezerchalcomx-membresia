@@ -1,4 +1,3 @@
-<!-- app/views/members/index.php -->
 <?php $base = rtrim(BASE_URL, '/'); ?>
 
 <div class="container py-4">
@@ -21,18 +20,19 @@
                 </tr>
             </thead>
             <tbody>
-                <?php if (!empty($members)): ?>
+                <?php if (!empty($members) && is_array($members)): ?>
                     <?php foreach ($members as $m): ?>
                         <tr>
-                            <td><?= htmlspecialchars($m['nombres']) ?></td>
-                            <td><?= htmlspecialchars($m['apellido_paterno'] . ' ' . $m['apellido_materno']) ?></td>
-                            <td><?= htmlspecialchars($m['correo']) ?></td>
+                            <td><?= htmlspecialchars($m['nombres'] ?? '') ?></td>
+                            <td><?= htmlspecialchars(($m['apellido_paterno'] ?? '') . ' ' . ($m['apellido_materno'] ?? '')) ?>
+                            </td>
+                            <td><?= htmlspecialchars($m['correo'] ?? '') ?></td>
                             <td>
-                                <a href="<?= $base ?>/index.php?controller=members&action=edit&id=<?= $m['id'] ?>"
+                                <a href="<?= $base ?>/index.php?controller=members&action=edit&id=<?= $m['id'] ?? 0 ?>"
                                     class="btn btn-sm btn-outline-primary me-1">
                                     <i class="bi bi-pencil-square"></i>
                                 </a>
-                                <a href="<?= $base ?>/index.php?controller=members&action=delete&id=<?= $m['id'] ?>"
+                                <a href="<?= $base ?>/index.php?controller=members&action=delete&id=<?= $m['id'] ?? 0 ?>"
                                     class="btn btn-sm btn-outline-danger"
                                     onclick="return confirm('¿Seguro que deseas eliminar este registro?')">
                                     <i class="bi bi-trash"></i>
