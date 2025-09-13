@@ -111,7 +111,7 @@ $action = $action ?? "$base/index.php?controller=members&action=store";
                 <div class="col-md-12">
                   <label class="form-label">Cursos teológicos y/o discipulados</label>
                   <?php
-                  $opcionesCursos = ['Basica 1', 'Basica 2', 'Mayordomia', 'Servicio', 'Ninguno'];
+                  $opcionesCursos = ['Basica 1', 'Basica 2', 'Mayordomia', 'Servicio', 'Ninguno', 'Todos'];
                   $seleccionados = json_decode($member->cursos ?? '[]', true) ?: []; // 🛡️ Fallback a []
                   ?>
                   <select name="cursos[]" class="form-select" multiple>
