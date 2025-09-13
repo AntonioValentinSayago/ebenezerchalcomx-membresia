@@ -121,8 +121,6 @@ $action = $action ?? "$base/index.php?controller=members&action=store";
                       </option>
                     <?php endforeach; ?>
                   </select>
-                  <div class="form-text">Puedes mantener presionado Ctrl (Windows) o Cmd (Mac) para seleccionar más de
-                    uno.</div>
                 </div>
 
 
