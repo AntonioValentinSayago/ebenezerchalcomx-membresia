@@ -43,7 +43,9 @@ class Member
         $this->nivel_academico = trim($data['nivel_academico'] ?? '');
         $this->fecha_conversion = $data['fecha_conversion'] ?? null;
         $this->ocupacion = trim($data['ocupacion'] ?? '');
-        $this->cursos = trim($data['cursos'] ?? '');
+        $this->cursos = isset($data['cursos']) && is_array($data['cursos'])
+            ? json_encode($data['cursos'], JSON_UNESCAPED_UNICODE)
+            : json_encode([]);
         $this->iglesia_anterior = trim($data['iglesia_anterior'] ?? '');
         $this->razon_salida = trim($data['razon_salida'] ?? '');
         $this->talentos = trim($data['talentos'] ?? '');
