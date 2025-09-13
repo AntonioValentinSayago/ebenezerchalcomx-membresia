@@ -112,7 +112,7 @@ $action = $action ?? "$base/index.php?controller=members&action=store";
                   <label class="form-label">Cursos teológicos y/o discipulados</label>
                   <?php
                   $opcionesCursos = ['Basica 1', 'Basica 2', 'Mayordomia', 'Servicio'];
-                  $seleccionados = json_decode($member->cursos ?? '[]', true); // Convertir de JSON a array
+                  $seleccionados = json_decode($member->cursos ?? '[]', true) ?: []; // 🛡️ Fallback a []
                   ?>
                   <select name="cursos[]" class="form-select" multiple>
                     <?php foreach ($opcionesCursos as $curso): ?>
@@ -124,6 +124,7 @@ $action = $action ?? "$base/index.php?controller=members&action=store";
                   <div class="form-text">Puedes mantener presionado Ctrl (Windows) o Cmd (Mac) para seleccionar más de
                     uno.</div>
                 </div>
+
 
                 <div class="col-md-12">
                   <label class="form-label">Talentos (separa por comas) *</label>
