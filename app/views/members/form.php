@@ -111,10 +111,10 @@ $action = $action ?? "$base/index.php?controller=members&action=store";
                 <div class="col-md-12">
                   <label class="form-label">Cursos teológicos y/o discipulados</label>
                   <?php
-                  $opcionesCursos = ['Basica 1', 'Basica 2', 'Mayordomia', 'Servicio', 'Ninguno', 'Todos'];
-                  $seleccionados = json_decode($member->cursos ?? '[]', true) ?: []; // 🛡️ Fallback a []
+                  $opcionesCursos = ['Todos', 'Basica 1', 'Basica 2', 'Mayordomia', 'Servicio'];
+                  $seleccionados = json_decode($member->cursos ?? '[]', true) ?: [];
                   ?>
-                  <select name="cursos[]" class="form-select" multiple>
+                  <select name="cursos[]" class="form-select" id="cursosSelect" multiple>
                     <?php foreach ($opcionesCursos as $curso): ?>
                       <option value="<?= htmlspecialchars($curso) ?>" <?= in_array($curso, $seleccionados) ? 'selected' : '' ?>>
                         <?= htmlspecialchars($curso) ?>
@@ -124,6 +124,7 @@ $action = $action ?? "$base/index.php?controller=members&action=store";
                   <div class="form-text">Puedes mantener presionado Ctrl (Windows) o Cmd (Mac) para seleccionar más de
                     uno.</div>
                 </div>
+
 
 
                 <div class="col-md-12">
@@ -189,3 +190,25 @@ $action = $action ?? "$base/index.php?controller=members&action=store";
     </div>
   </div>
 </div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const select = document.getElementById("cursosSelect");
+
+    select.addEventListener("change", function () {
+      const values = Array.from(select.selectedOptions).map(opt => opt.value);
+
+      // Si se selecciona "Todos", marcar todo
+      if (values.includes("Todos")) {
+        for (let option of select.options) {
+          option.selected = true;
+        }
+      }
+
+      // Si se deselecciona "Todos", desmarcar solo "Todos"
+      else if (!values.includes("Todos") && select.querySelector('option[value="Todos"]').selected) {
+        select.querySelector('option[value="Todos"]').selected = false;
+      }
+    });
+  });
+</script>
