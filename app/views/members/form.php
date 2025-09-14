@@ -65,7 +65,8 @@ $action = $action ?? "$base/index.php?controller=members&action=store";
                 <div class="col-md-6">
                   <label class="form-label">Fecha de nacimiento *</label>
                   <input required name="fecha_nacimiento" type="date" class="form-control"
-                    value="<?= $val('fecha_nacimiento') ?>">
+                      value="<?= $val('fecha_nacimiento') ?>"
+                      max="<?= date('Y-m-d') ?>">
                 </div>
                 <div class="col-md-3">
                   <label class="form-label">Edad *</label>
@@ -106,7 +107,8 @@ $action = $action ?? "$base/index.php?controller=members&action=store";
                 <div class="col-md-6">
                   <label class="form-label">Fecha de conversión</label>
                   <input name="fecha_conversion" type="date" class="form-control"
-                    value="<?= $val('fecha_conversion') ?>">
+                    value="<?= $val('fecha_conversion') ?>"
+                    max="<?= date('Y-m-d') ?>">
                 </div>
                 <div class="col-md-12">
                   <label class="form-label">Cursos teológicos y/o discipulados</label>
@@ -141,7 +143,7 @@ $action = $action ?? "$base/index.php?controller=members&action=store";
                   </select>
                 </div>
                 <div class="col-md-6">
-                  <label class="form-label">Correo electrónico *</label>
+                  <label class="form-label">Correo electrónico</label>
                   <input name="correo" type="email" class="form-control" value="<?= $val('correo') ?>">
                 </div>
                 <div class="col-md-6">
