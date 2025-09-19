@@ -2,7 +2,7 @@
 
 
 <div class="alert alert-warning" role="alert">
-  Hermano, registrado correctamente
+  Los hermanos se registran correctamente, Cualquier duda o comentario favor de pasar con el equipo de Multimedia.
 </div>
 
 <hr />
