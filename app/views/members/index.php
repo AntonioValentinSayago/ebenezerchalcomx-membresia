@@ -1,11 +1,18 @@
 <?php $base = rtrim(BASE_URL, '/'); ?>
 
+
+<div class="alert alert-warning" role="alert">
+  Hermano, registrado correctamente
+</div>
+
+<hr />
+
 <div class="container py-4">
     <div class="alert alert-danger" role="alert">
-  <h4 class="alert-heading">Error!</h4>
-  <p> Información no disponible por el momento.</p>
+  <h4 class="alert-heading">Advertencia</h4>
+  <p> Información de los hermanos no disponible por motivos de Seguridas.</p>
   <hr>
-  <p class="mb-0">Intentalo más tarde.</p>
+  <p class="mb-0">Disponible más tarde.</p>
 </div>
 </div>
 
