@@ -10,7 +10,7 @@
 <div class="container py-4">
     <div class="alert alert-danger" role="alert">
   <h4 class="alert-heading">Advertencia</h4>
-  <p> Información de los hermanos no disponible por motivos de Seguridas.</p>
+  <p> La información de los hermanos no se encuentra disponible por motivos de Seguridad.</p>
   <hr>
   <p class="mb-0">Disponible más tarde.</p>
 </div>
